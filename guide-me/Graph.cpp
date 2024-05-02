@@ -165,7 +165,7 @@ void Graph::bfs(Node* node) {
 	{
 		Node* current = open.front();
 		open.pop();
-		cout << current->value << "\t";
+	//	cout << current->value << "\t";
 		current->isVisted = true;
 
 		for (Node* child : adj[current])
@@ -186,7 +186,7 @@ bool Graph::inOpen(Node* node, queue<Node*> open) {
 
 void Graph::dfs(Node* node) {
 	node->isVisted = true;
-	cout << node->value << "\t";
+	//cout << node->value << "\t";
 
 	for (Node* child : adj[node])
 		if (!(child->isVisted))
@@ -227,9 +227,10 @@ void Graph::getEachPath(Node* dest) {
 }
 void Graph::getPaths() {
 	for (auto& path : paths) {
-		for (int i = path.size() - 1; i >= 0; i--)
-			cout << path[i] << " ";
-		cout << el;
+		for (int i = path.size() - 1; i >= 0; i--) {
+		//	cout << path[i] << " ";
+		}
+		//cout << el;
 	}
 }
 
