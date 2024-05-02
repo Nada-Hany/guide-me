@@ -329,4 +329,47 @@ void Graph::validWeightedPath(Node* start, Node* dest, float budget) {
 	int j = 0;
 	//path number 
 }
+
+//mariam
+vector<pair<vector<string>, int>> Graph::DFS(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited) {
+	path.push_back(src);
+	visited.insert(src);
+
+	vector<pair<vector<string>, int>> result;
+
+	if (src == dest) {
+		int total_budget = 0;
+		for (int i = 0; i < path.size() - 1; i++) { // CALC
+			int min_cost = INT_MAX;
+			for (auto neighbor : graph[path[i]]) {
+				if (neighbor.first == path[i + 1]) {
+					for (auto weight_transportation_method : neighbor.second) {
+						if (weight_transportation_method.first < min_cost) {
+							min_cost = weight_transportation_method.first;
+						}
+					}
+					break;
+				}
+			}
+			total_budget += min_cost;
+		}
+		result.push_back({ path, total_budget });
+	}
+	else {
+		for (auto neighbor : graph[src]) {
+			if (visited.find(neighbor.first) == visited.end() && budget >= neighbor.second.front().first) { //check the DFS s not called 4 visited node
+				vector<string> new_path = path;
+				set<string> new_visited = visited;
+				vector<pair<vector<string>, int>> sub_paths = DFS(neighbor.first, dest, new_path, budget - neighbor.second.front().first, new_visited);
+				result.insert(result.end(), sub_paths.begin(), sub_paths.end());
+			}
+		}
+	}
+
+	path.pop_back();
+	visited.erase(src); // cause it can be visited n another path
+
+	return result;
+}
+
 Graph::~Graph() {}

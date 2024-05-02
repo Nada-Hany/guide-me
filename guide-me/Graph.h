@@ -4,6 +4,8 @@
 #include <list>
 #include <string>
 #include <queue>
+#include <set>
+#include <unordered_map>
 
 using namespace std;
 
@@ -36,6 +38,9 @@ class Graph
 	void toLowerCase(string&);
 	void getEachPath(Node*);
 	vector<vector<string>> paths;
+	
+	//mariam
+	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>> graph;
 
 public:
 	int nodesNumber = 0;
@@ -57,6 +62,9 @@ public:
 	bool checkCompleteness();
 	void getWeightedPaths(vector <vector< pair<vector<string>, float >> >&, float);
 	void validWeightedPath(Node*, Node*, float);
+
+	//mariam
+	vector<pair<vector<string>, int>> DFS(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited);
 	~Graph();
 };
 
