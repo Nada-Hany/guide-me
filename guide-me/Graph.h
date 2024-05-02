@@ -40,7 +40,7 @@ class Graph
 	vector<vector<string>> paths;
 	
 	//mariam
-	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>> graph;
+	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>> g;
 
 public:
 	int nodesNumber = 0;
@@ -65,6 +65,9 @@ public:
 
 	//mariam
 	vector<pair<vector<string>, int>> lowestPath(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited);
+	const unordered_map<string, vector<pair<string, vector<pair<int, string>>>>>& getGraph() const {
+		return g;
+	}
 	~Graph();
 };
 
