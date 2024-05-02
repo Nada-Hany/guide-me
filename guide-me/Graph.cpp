@@ -332,7 +332,7 @@ void Graph::validWeightedPath(Node* start, Node* dest, float budget) {
 }
 
 //mariam
-vector<pair<vector<string>, int>> Graph::DFS(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited) {
+vector<pair<vector<string>, int>> Graph::lowestPath(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited) {
 	path.push_back(src);
 	visited.insert(src);
 
@@ -361,7 +361,7 @@ vector<pair<vector<string>, int>> Graph::DFS(const string& src, const string& de
 			if (visited.find(neighbor.first) == visited.end() && budget >= neighbor.second.front().first) { //check the DFS s not called 4 visited node
 				vector<string> new_path = path;
 				set<string> new_visited = visited;
-				vector<pair<vector<string>, int>> sub_paths = DFS(neighbor.first, dest, new_path, budget - neighbor.second.front().first, new_visited);
+				vector<pair<vector<string>, int>> sub_paths = lowestPath(neighbor.first, dest, new_path, budget - neighbor.second.front().first, new_visited);
 				result.insert(result.end(), sub_paths.begin(), sub_paths.end());
 			}
 		}

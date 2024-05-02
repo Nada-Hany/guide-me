@@ -64,7 +64,7 @@ public:
 	void validWeightedPath(Node*, Node*, float);
 
 	//mariam
-	vector<pair<vector<string>, int>> DFS(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited);
+	vector<pair<vector<string>, int>> lowestPath(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited);
 	~Graph();
 };
 
