@@ -15,6 +15,8 @@ public:
     GuideMe(QWidget* parent = nullptr);
     ~GuideMe();
 
+    void updateVariables(string& src, string& dest, float& budget, string& transportation);
+
     void on_openSecond_clicked();
 
     void on_openThird_clicked();
@@ -22,6 +24,28 @@ public:
     void on_back2_clicked();
 
     void on_back3_clicked();
+
+    void on_back4_clicked();
+
+    void on_back5_clicked();
+
+    void on_openThird_2_clicked();
+
+    void on_openUpdate_clicked();
+
+    void on_updateButton_clicked();
+
+    void on_addButton_clicked();
+
+    void on_deleteButton_clicked();
+
+    void on_openTraverse_clicked();
+
+    void on_dfsButton_clicked();
+
+    void on_bfsButton_clicked();
+
+    void on_completeButton_clicked();
 
     void drawGraphInStackedWidget(Graph* graph);
 
