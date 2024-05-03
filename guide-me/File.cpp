@@ -41,6 +41,8 @@ void File::convertToObjects(Graph* graph) {
 			continue;
 		}
 		graph->addEdge(line[0], line[1]);
+		graph->allNodes.insert(line[0]);
+		graph->allNodes.insert(line[1]);
 	}
 }
 void File::writeOnFile(Graph* graph) {

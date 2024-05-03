@@ -32,7 +32,7 @@ public:
 
 class Graph
 {
-	map <string, int> indices;
+	unordered_map <string, int> indices;
 	bool inOpen(Node*, queue<Node*>);
 	bool childExist(Node*, Node*);
 	void toLowerCase(string&);
@@ -40,12 +40,13 @@ class Graph
 	vector<vector<string>> paths;
 	
 	//mariam
-	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>> g;
+	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>> graph;
 
 public:
+	set<string> allNodes;
 	int nodesNumber = 0;
 	Node* destination = nullptr;
-	map<Node*, vector<Node*>> adj;
+	unordered_map<Node*, vector<Node*>> adj;
 
 	Graph();
 	void getPaths();
@@ -64,9 +65,10 @@ public:
 	void validWeightedPath(Node*, Node*, float);
 
 	//mariam
-	vector<pair<vector<string>, int>> lowestPath(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited);
-	const unordered_map<string, vector<pair<string, vector<pair<int, string>>>>>& getGraph() const {
-		return g;
+	vector<pair<vector<string>, float>> lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited);
+	float getWeight(Node* parent, Node* child);
+	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>>& getGraph() {
+		return graph;
 	}
 	~Graph();
 };

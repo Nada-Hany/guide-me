@@ -1,4 +1,4 @@
-#include "MainClass.h"
+#include "GuideMe.h"
 #include "File.h"
 #include "Graph.h"
 #include <iostream>
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     file.convertWeights(graph);
 
     QApplication a(argc, argv);
-    MainClass w;
+    GuideMe w;
     w.setGraph(graph);
     w.show();
     

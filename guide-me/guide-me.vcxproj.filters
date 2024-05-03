@@ -26,13 +26,13 @@
     <QtRcc Include="MainClass.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="MainClass.ui">
+    <QtUic Include="GuideMe.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="MainClass.h">
+    <QtMoc Include="GuideMe.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="MainClass.cpp">
+    <ClCompile Include="GuideMe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

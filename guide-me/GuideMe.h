@@ -1,19 +1,19 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-#include "ui_MainClass.h"
+#include "ui_GuideMe.h"
 #include "graph.h"
 #include <QGraphicsView> // really?
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 
-class MainClass : public QMainWindow
+class GuideMe : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainClass(QWidget* parent = nullptr);
-    ~MainClass();
+    GuideMe(QWidget* parent = nullptr);
+    ~GuideMe();
 
     void on_openSecond_clicked();
 
@@ -23,14 +23,14 @@ public:
 
     void on_back3_clicked();
 
-    void drawGraphInStackedWidget(const Graph& graph);
+    void drawGraphInStackedWidget(Graph* graph);
 
     void displayGraph(const Graph& graph);
 
 private:
-    Ui::MainClassClass ui;
-    Graph graph; // Add the graph member variable
+    Ui::GuideMeClass ui;
+    Graph* graph; // Add the graph member variable
 public:
-    void setGraph(Graph& graph);
+    void setGraph(Graph* graph);
 };
 

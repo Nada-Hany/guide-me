@@ -2,11 +2,12 @@
 #include <iostream>
 #include <queue>
 #include <map>
+#include <set>
 
 using namespace std;
 
 #define el endl
-#define MAX 1000
+#define MAX 10000
 
 //node class
 Node::Node(string val) {
@@ -48,7 +49,7 @@ void Node::changeWeightType(vector<pair<string, float>>& allweights, string weig
 	}
 }
 void Node::deleteWeight(Node* parent, Node* child, string weightType) {
-	int index = parent->weightExist(parent, child, weightType);
+	float index = parent->weightExist(parent, child, weightType);
 	parent->weights[child].erase(parent->weights[child].begin() + index);
 }
 void Node::addWeight(Node* parent, Node* child, float weightValue, string weightType) {
@@ -227,7 +228,7 @@ void Graph::getEachPath(Node* dest) {
 }
 void Graph::getPaths() {
 	for (auto& path : paths) {
-		for (int i = path.size() - 1; i >= 0; i--) {
+		for (float i = path.size() - 1; i >= 0; i--) {
 		//	cout << path[i] << " ";
 		}
 		//cout << el;
@@ -268,6 +269,7 @@ void Graph::clearVisted() {
 	for (auto& node : adj)
 		node.first->isVisted = false;
 }
+
 //dont ask me abt complexity pls 
 void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& allPaths, float budget) {
 	vector < pair<vector<string>, float>>final;
@@ -277,7 +279,7 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 	for (auto eachPath : paths) {
 		bool firstTime = true;
 		//each node for each path
-		for (int i = eachPath.size() - 2; i >= 0; i--) {
+		for (float i = eachPath.size() - 2; i >= 0; i--) {
 			Node* node1 = getNode(eachPath[i]);
 			Node* node2 = getNode(eachPath[i + 1]);
 			vector<pair <vector< string>, float >> tmp;
@@ -298,10 +300,10 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 			}
 			//final -> 1st edge , tmp -> 2nd edge >> add on final /
 			else {
-				int outer = -1;
+				float outer = -1;
 				//getting combinations
 				for (auto n1 : final) {
-					int inner = -1;
+					float inner = -1;
 					outer++;
 					for (auto n2 : tmp) {
 						vector<string> weightType;
@@ -327,26 +329,34 @@ void Graph::validWeightedPath(Node* start, Node* dest, float budget) {
 	dfs(start, dest);
 	vector <vector< pair<vector<string>, float >> >path;
 	//getWeightedPaths(path, budget);
-	int j = 0;
+	float j = 0;
 	//path number 
 }
 
 //mariam
-vector<pair<vector<string>, int>> Graph::lowestPath(const string& src, const string& dest, vector<string>& path, int budget, set<string>& visited) {
+vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited) {
 	path.push_back(src);
 	visited.insert(src);
-
-	vector<pair<vector<string>, int>> result;
-
+	toLowerCase(src);
+	toLowerCase(dest);
+	vector<pair<vector<string>, float>> result;
 	if (src == dest) {
-		int total_budget = 0;
-		for (int i = 0; i < path.size() - 1; i++) { // CALC
-			int min_cost = INT_MAX;
-			for (auto neighbor : graph[path[i]]) {
-				if (neighbor.first == path[i + 1]) {
-					for (auto weight_transportation_method : neighbor.second) {
-						if (weight_transportation_method.first < min_cost) {
-							min_cost = weight_transportation_method.first;
+		float total_budget = 0;
+		//iterationg over all nodes in a specific path
+		for (float i = 0; i < path.size() - 1; i++) { // CALC
+			float min_cost = MAX;
+			//iterating over all childs of a parent in each iteration
+			Node* parent = getNode(path[i]);
+			//path -> cairo-----mansoura domyat 
+			//child 
+			for (auto eachChild : adj[parent]) {
+				//path[i+1] -> represents 
+				Node* child = getNode(path[i + 1]);
+				if (child->value == path[i + 1]) {
+					//iterating over the budget of the created edge 
+					for (auto weight : child->weights[parent]) {
+						if (weight.second < min_cost && weight.second <= budget) {
+							min_cost = weight.second;
 						}
 					}
 					break;
@@ -357,20 +367,37 @@ vector<pair<vector<string>, int>> Graph::lowestPath(const string& src, const str
 		result.push_back({ path, total_budget });
 	}
 	else {
-		for (auto neighbor : graph[src]) {
-			if (visited.find(neighbor.first) == visited.end() && budget >= neighbor.second.front().first) { //check the DFS s not called 4 visited node
+		Node* srcNode = getNode(src);
+		for (auto neighbor : adj[srcNode]) {
+
+			if (visited.find(neighbor->value) == visited.end() && budget >= getWeight(srcNode,neighbor)) { //check the DFS s not called 4 visited node
 				vector<string> new_path = path;
 				set<string> new_visited = visited;
-				vector<pair<vector<string>, int>> sub_paths = lowestPath(neighbor.first, dest, new_path, budget - neighbor.second.front().first, new_visited);
+				vector<pair<vector<string>, float>> sub_paths = lowestPath(neighbor->value, dest, new_path, budget, new_visited);
 				result.insert(result.end(), sub_paths.begin(), sub_paths.end());
 			}
 		}
 	}
 
 	path.pop_back();
-	visited.erase(src); // cause it can be visited n another path
+	visited.erase(src);
 
 	return result;
+}
+
+float Graph::getWeight(Node * parent, Node * child) {
+	int max = MAX;
+	for (auto& childs : adj[parent]) {
+		if(child->value == childs->value)
+		{
+			for (auto& weight : child->weights[parent]) {
+				if (weight.second <= max) {
+					max = weight.second;
+				}
+			}
+		}
+	}
+	return max;
 }
 
 Graph::~Graph() {}

@@ -90,11 +90,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="MainClass.qrc" />
-    <QtUic Include="MainClass.ui" />
-    <QtMoc Include="MainClass.h" />
+    <QtUic Include="GuideMe.ui" />
+    <QtMoc Include="GuideMe.h" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="MainClass.cpp" />
+    <ClCompile Include="GuideMe.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
