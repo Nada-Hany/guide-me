@@ -37,6 +37,7 @@ GuideMe::GuideMe(QWidget* parent)
     connect(ui.back3, &QPushButton::clicked, this, &GuideMe::on_back3_clicked);
     connect(ui.back4, &QPushButton::clicked, this, &GuideMe::on_back4_clicked);
     connect(ui.back5, &QPushButton::clicked, this, &GuideMe::on_back5_clicked);
+    connect(ui.mainBack, &QPushButton::clicked, this, &GuideMe::on_mainBack_clicked);
 
     ui.stackedWidget->setCurrentIndex(0);
 
@@ -62,12 +63,37 @@ void GuideMe::setGraph(Graph* graph) {
 
 }
 
+void GuideMe::setFile(File* f)
+{
+    this->file = f;
+}
 
-void GuideMe::updateVariables(string& src, string& dest, float& budget, string& transportation) {
-    src = ui.sourceBox_2->currentText().toStdString();
-    dest = ui.destBox_2->currentText().toStdString();
+
+bool GuideMe::updateVariables(string& source, string& destination, float& budget, string& transportation, int action) {
+    source = ui.sourceBox_2->currentText().toStdString();
+    destination = ui.destBox_2->currentText().toStdString();
     budget = ui.budgetLine_2->text().toFloat();
     transportation = ui.transLine->text().toStdString();
+    toLowerCase(source);
+    toLowerCase(destination);
+    toLowerCase(transportation);
+    Node* src = graph->getNode(source);
+    Node* dest = graph->getNode(destination);
+    switch (action)
+    {
+    //add
+    case 1:
+        return src->addWeight(src, dest, budget, transportation);
+    //delete
+    case 2:
+        return src->deleteWeight(src, dest,transportation);
+    //modify 
+    case 3:
+        return src->changeWeightValue(src->weights[dest], budget, transportation);
+    default:
+        break;
+    }
+    return false;
 }
 
 
@@ -79,24 +105,34 @@ void GuideMe::on_openUpdate_clicked() {
     ui.stackedWidget->setCurrentIndex(3);
 }
 void GuideMe::on_updateButton_clicked() {
-    string src, dest, transportation;
+    string src, dest, transportation,result;
     float budget;
-    updateVariables(src, dest, budget, transportation);
-    string result = "UPDATED"; //nada (check updated or not )
+    bool check = updateVariables(src, dest, budget, transportation, 3);
+    if (check)
+        result = "UPDATED"; //nada (check updated or not )
+    else
+        result = "There's no such edge";
     ui.updateLabel->setText(QString::fromStdString(result));
 }
 void GuideMe::on_addButton_clicked() {
-    string src, dest, transportation;
+    string src, dest, transportation, result;
     float budget;
-    updateVariables(src, dest, budget, transportation);
-    string result = "ADDED"; //nada (check added or not )
+    bool check = updateVariables(src, dest, budget, transportation, 1);
+    if (check)
+        result = "ADDED"; //nada (check added or not )
+    else
+        result = "try again";
     ui.updateLabel->setText(QString::fromStdString(result));
 }
 void GuideMe::on_deleteButton_clicked() {
-    string src, dest, transportation;
+    string src, dest, transportation, result;
     float budget;
-    updateVariables(src, dest, budget, transportation);
-    string result = "DELETED"; //nada (check deleted or not )
+    bool check = updateVariables(src, dest, budget, transportation, 2);
+    //nada (check deleted or not )
+    if (check)
+        result = "edge deleted";
+    else
+        result = "edge does't exist";
     ui.updateLabel->setText(QString::fromStdString(result));
 }
 
@@ -171,15 +207,25 @@ void GuideMe::on_openThird_2_clicked() {
 
 
 void GuideMe::on_dfsButton_clicked() {
+    clearUp();
+    string out = "";
+    graph->dfs(graph->getNode("giza"), out);
     ui.mapPathsAlgo->setText("dfs"); //nada (DFS traversing map)
 }
 
 void GuideMe::on_bfsButton_clicked() {
-    ui.mapPathsAlgo->setText("bfs"); //nada (BFS traversing map)
+    clearUp();
+    string src = "giza";
+    string out = graph->bfs(graph->getNode(src));
+    ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (BFS traversing map)
 }
 
 void GuideMe::on_completeButton_clicked() {
-    ui.mapPathsAlgo->setText("complete"); //nada (check complete)
+    bool isComplete = graph->checkCompleteness();
+    if (isComplete)
+        ui.mapPathsAlgo->setText("graph is conmplete"); //nada (check complete)
+    else
+        ui.mapPathsAlgo->setText("graph isn't conmplete");
 }
 
 
@@ -196,8 +242,15 @@ void GuideMe::on_back5_clicked() {
     ui.stackedWidget->setCurrentIndex(0);
 }
 
+void GuideMe::on_mainBack_clicked(){
+    this->file->writeOnFile(graph);
+    this->close();
+}
 
-
+void GuideMe::clearUp() {
+    graph->clearPrevious();
+    graph->clearVisted();
+}
 
 
 void GuideMe::drawGraphInStackedWidget(Graph* graph) {

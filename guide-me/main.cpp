@@ -8,16 +8,16 @@
 
 int main(int argc, char *argv[])
 {
-    File file("TransportationMap.txt");
-    file.readFile();
     Graph* graph = new Graph();
-    file.convertToObjects(graph);
-    file.convertWeights(graph);
+    File* file = new File("TransportationMap.txt");
+    file->readFile();
+    file->convertWeights(graph);
 
     QApplication a(argc, argv);
     GuideMe w;
     w.setGraph(graph);
+    w.setFile(file);
     w.show();
-    
+
     return a.exec();
 }

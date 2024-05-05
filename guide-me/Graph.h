@@ -16,15 +16,15 @@ class Node
 public:
 
 	Node* previous = nullptr;
-	map<Node*, vector<pair<string, float>>> weights;
+	unordered_map<Node*, vector<pair<string, float>>> weights;
 	string value;
 
 	bool isVisted = false;
 	int weightExist(Node*, Node*, string);
-	void changeWeightValue(vector<pair<string, float>>&, float, string);
+	bool changeWeightValue(vector<pair<string, float>>&, float, string);
 	void changeWeightType(vector<pair<string, float>>&, string);
-	void deleteWeight(Node*, Node*, string);
-	void addWeight(Node*, Node*, float, string);
+	bool deleteWeight(Node*, Node*, string);
+	bool addWeight(Node*, Node*, float, string);
 	Node(string);
 	~Node();
 
@@ -54,10 +54,10 @@ public:
 	void addEdge(string, string);
 	void addEdge(string, string, string, float, int);
 	//traversing
-	void dfs(Node*);
+	void dfs(Node*, string&);
 	//all possible paths without considering the weights
 	void dfs(Node*, Node*);
-	void bfs(Node*);
+	string bfs(Node*);
 	void clearVisted();
 	void clearPrevious();
 	bool checkCompleteness();

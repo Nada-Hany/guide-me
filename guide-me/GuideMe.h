@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_GuideMe.h"
 #include "graph.h"
+#include "File.h"
 #include <QGraphicsView> // really?
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
@@ -15,7 +16,7 @@ public:
     GuideMe(QWidget* parent = nullptr);
     ~GuideMe();
 
-    void updateVariables(string& src, string& dest, float& budget, string& transportation);
+    bool updateVariables(string& src, string& dest, float& budget, string& transportation, int);
 
     void on_openSecond_clicked();
 
@@ -28,6 +29,10 @@ public:
     void on_back4_clicked();
 
     void on_back5_clicked();
+
+    void on_mainBack_clicked();
+
+    void clearUp();
 
     void on_openThird_2_clicked();
 
@@ -49,12 +54,15 @@ public:
 
     void drawGraphInStackedWidget(Graph* graph);
 
-    void displayGraph(const Graph& graph);
+
+  //  void displayGraph(const Graph& graph);
 
 private:
     Ui::GuideMeClass ui;
     Graph* graph; // Add the graph member variable
+    File* file;
 public:
     void setGraph(Graph* graph);
+    void setFile(File*);
 };
 

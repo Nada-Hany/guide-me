@@ -11,6 +11,7 @@ using namespace std;
 File::File(string name) {
 	path = name;
 }
+
 void File::readFile() {
 	ifstream file(path);
 	string line;
@@ -95,6 +96,8 @@ void File::convertWeights(Graph* graph) {
 				}
 			}
 		}
+		graph->allNodes.insert(line[0]);
+		graph->allNodes.insert(line[1]);
 	}
 }
 void File::toLowerCase(string& str) {

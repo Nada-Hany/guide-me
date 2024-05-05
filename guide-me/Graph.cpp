@@ -30,14 +30,15 @@ int Node::weightExist(Node* parent, Node* child, string weightType) {
 	return -1;
 }
 //update el mfrod tkon fel weight value bs wla type w weight value?
-void Node::changeWeightValue(vector<pair<string, float>>& allWeights, float weightValue, string weightType) {
+bool Node::changeWeightValue(vector<pair<string, float>>& allWeights, float weightValue, string weightType) {
 	for (auto& t : allWeights) {
 		if (weightType == t.first)
 		{
 			t.second = weightValue;
-			return;
+			return true;
 		}
 	}
+	return false;
 }
 void Node::changeWeightType(vector<pair<string, float>>& allweights, string weightType) {
 	for (auto& t : allweights) {
@@ -48,12 +49,27 @@ void Node::changeWeightType(vector<pair<string, float>>& allweights, string weig
 		}
 	}
 }
-void Node::deleteWeight(Node* parent, Node* child, string weightType) {
-	float index = parent->weightExist(parent, child, weightType);
-	parent->weights[child].erase(parent->weights[child].begin() + index);
+bool Node::deleteWeight(Node* parent, Node* child, string weightType) {
+	int index = parent->weightExist(parent, child, weightType);
+	if (index != -1)
+	{
+		parent->weights[child].erase(parent->weights[child].begin() + index);
+		int i = child->weightExist(child, parent, weightType);
+		if (i != -1)
+			child->weights[parent].erase(child->weights[parent].begin() + i);
+		return true;
+	}
+	else
+		return false;
 }
-void Node::addWeight(Node* parent, Node* child, float weightValue, string weightType) {
-	parent->weights[child].push_back(make_pair(weightType, weightValue));
+bool Node::addWeight(Node* parent, Node* child, float weightValue, string weightType) {
+	if(parent->weightExist(parent, child, weightType) == -1)
+	{
+		parent->weights[child].push_back(make_pair(weightType, weightValue));
+		child->weights[parent].push_back(make_pair(weightType, weightValue));
+		return true;
+	}
+	return false;
 }
 
 Node::~Node() {}
@@ -96,17 +112,17 @@ void Graph::addEdge(string node1, string node2, string weightType, float weightV
 			//add
 		case 1:
 			if (node1_obj->weightExist(node1_obj, node2_obj, weightType) == -1)
-				node1_obj->addWeight(node1_obj, node2_obj, weightValue, weightType);
+				bool x = node1_obj->addWeight(node1_obj, node2_obj, weightValue, weightType);
 			break;
 			//delete
 		case 2:
 			if (node1_obj->weightExist(node1_obj, node2_obj, weightType) != -1)
-				node1_obj->deleteWeight(node1_obj, node2_obj, weightType);
+				bool x = node1_obj->deleteWeight(node1_obj, node2_obj, weightType);
 			break;
 			//update weightValue
 		case 3:
 			if (node1_obj->weightExist(node1_obj, node2_obj, weightType) != -1)
-				node1_obj->changeWeightValue(node1_obj->weights[node2_obj], weightValue, weightType);
+				bool x = node1_obj->changeWeightValue(node1_obj->weights[node2_obj], weightValue, weightType);
 			break;
 		default:
 			break;
@@ -159,20 +175,23 @@ void Graph::addEdge(string node1, string node2) {
 		adj[node2_obj].push_back(node1_obj);
 }
 
-void Graph::bfs(Node* node) {
+string Graph::bfs(Node* node) {
 	queue<Node*> open;
 	open.push(node);
+	string out="";
 	while (open.size())
 	{
 		Node* current = open.front();
 		open.pop();
 	//	cout << current->value << "\t";
+		out = out + current->value + " ";
 		current->isVisted = true;
 
 		for (Node* child : adj[current])
 			if (!child->isVisted && !inOpen(child, open))
 				open.push(child);
 	}
+	return out;
 }
 bool Graph::inOpen(Node* node, queue<Node*> open) {
 	while (open.size())
@@ -185,13 +204,12 @@ bool Graph::inOpen(Node* node, queue<Node*> open) {
 	return false;
 }
 
-void Graph::dfs(Node* node) {
+void Graph::dfs(Node* node, string &out) {
 	node->isVisted = true;
-	//cout << node->value << "\t";
-
+	out = out + node->value + " ";
 	for (Node* child : adj[node])
 		if (!(child->isVisted))
-			dfs(child);
+			dfs(child, out);
 }
 void Graph::dfs(Node* node, Node* dest) {
 	node->isVisted = true;
