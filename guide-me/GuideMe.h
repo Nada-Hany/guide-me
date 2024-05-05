@@ -34,6 +34,8 @@ public:
 
     void clearUp();
 
+    void closeEvent(QCloseEvent* event) override;
+
     void on_openThird_2_clicked();
 
     void on_openUpdate_clicked();

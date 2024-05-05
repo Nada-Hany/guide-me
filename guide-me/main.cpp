@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     GuideMe w;
+    //w.setWindowFlags(w.windowFlags() & ~Qt::WindowCloseButtonHint);
     w.setGraph(graph);
     w.setFile(file);
     w.show();

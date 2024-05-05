@@ -3,6 +3,7 @@
 #include "Graph.h" 
 #include <iterator> 
 #include <QRandomGenerator>
+#include <qcloseevent>
 //#include <QGraphicsView>
 
 using namespace std;
@@ -102,6 +103,7 @@ void GuideMe::on_openSecond_clicked() {
 }
 
 void GuideMe::on_openUpdate_clicked() {
+    
     ui.stackedWidget->setCurrentIndex(3);
 }
 void GuideMe::on_updateButton_clicked() {
@@ -137,6 +139,9 @@ void GuideMe::on_deleteButton_clicked() {
 }
 
 void GuideMe::on_openTraverse_clicked() {
+    for (auto& node : graph->allNodes) {
+        ui.allNodes->addItem(QString::fromStdString(node));
+    }
     ui.stackedWidget->setCurrentIndex(1);
 }
 
@@ -209,14 +214,15 @@ void GuideMe::on_openThird_2_clicked() {
 void GuideMe::on_dfsButton_clicked() {
     clearUp();
     string out = "";
-    graph->dfs(graph->getNode("giza"), out);
-    ui.mapPathsAlgo->setText("dfs"); //nada (DFS traversing map)
+    string source = ui.destBox_2->currentText().toStdString();
+    graph->dfs(graph->getNode(source), out);
+    ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (DFS traversing map)
 }
 
 void GuideMe::on_bfsButton_clicked() {
     clearUp();
-    string src = "giza";
-    string out = graph->bfs(graph->getNode(src));
+    string source = ui.destBox_2->currentText().toStdString();
+    string out = graph->bfs(graph->getNode(source));
     ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (BFS traversing map)
 }
 
@@ -252,6 +258,11 @@ void GuideMe::clearUp() {
     graph->clearVisted();
 }
 
+void GuideMe::closeEvent(QCloseEvent* event){
+
+    file->writeOnFile(graph);
+    event->accept();
+}
 
 void GuideMe::drawGraphInStackedWidget(Graph* graph) {
     // Get the current widget from the stacked widget
