@@ -29,7 +29,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="mainBack">
@@ -385,7 +385,7 @@ font: 600 28pt &quot;Sitka Display Semibold&quot;;
 </string>
       </property>
       <property name="text">
-       <string> </string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -509,7 +509,7 @@ background-color: transparent;
 </string>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string> </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_13">
@@ -843,7 +843,7 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/pointer.png&quot;);
+       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
 background-color: transparent;
 </string>
       </property>
@@ -861,7 +861,7 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/pointer.png&quot;);
+       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
 background-color: transparent;
 </string>
       </property>
@@ -1125,7 +1125,7 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/bg.jpeg&quot;)</string>
+       <string notr="true">border-image: url(&quot;img/bg.jpeg&quot;)</string>
       </property>
       <property name="text">
        <string/>
@@ -1141,7 +1141,7 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/pointer.png&quot;);
+       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
 background-color: transparent;
 </string>
       </property>
@@ -1159,7 +1159,7 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/pointer.png&quot;);
+       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
 background-color: transparent;
 </string>
       </property>

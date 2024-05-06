@@ -45,7 +45,7 @@ GuideMe::GuideMe(QWidget* parent)
     connect(ui.mainBack, &QPushButton::clicked, this, &GuideMe::on_mainBack_clicked);
 
     ui.stackedWidget->setCurrentIndex(0);
-    QMovie* movie = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/airplan2.gif");
+    QMovie* movie = new QMovie("img/airplan2.gif");
     ui.woman_label->setMovie(movie);
     movie->start();
 }
@@ -112,7 +112,7 @@ bool GuideMe::updateVariables(string& source, string& destination, float& budget
 
 void GuideMe::on_openSecond_clicked() {
     ui.stackedWidget->setCurrentIndex(4);
-    QMovie* movie2 = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/road2.gif");
+    QMovie* movie2 = new QMovie("img/road2.gif");
     ui.road_label->setMovie(movie2);
     movie2->start();
 }
@@ -120,7 +120,7 @@ void GuideMe::on_openSecond_clicked() {
 void GuideMe::on_openUpdate_clicked() {
     
     ui.stackedWidget->setCurrentIndex(3);
-    QMovie* movie3 = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/road2.gif");
+    QMovie* movie3 = new QMovie("img/road2.gif");
     ui.road_label_2->setMovie(movie3);
     movie3->start();
 }
@@ -158,7 +158,7 @@ void GuideMe::on_deleteButton_clicked() {
 
 void GuideMe::on_openTraverse_clicked() {
     ui.stackedWidget->setCurrentIndex(1);
-    QMovie* movie4 = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/pharaoh.gif");
+    QMovie* movie4 = new QMovie("img/pharaoh.gif");
     ui.label_pharaoh->setMovie(movie4);
     movie4->start();
 }
