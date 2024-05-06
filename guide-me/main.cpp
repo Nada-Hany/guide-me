@@ -17,6 +17,10 @@ int main(int argc, char *argv[])
     GuideMe w;
     //w.setWindowFlags(w.windowFlags() & ~Qt::WindowCloseButtonHint);
     w.setGraph(graph);
+    w.resize(1920, 1080);
+    w.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint); 
+    w.setWindowState(Qt::WindowMaximized);
+  //  w.showFullScreen();
     w.setFile(file);
     w.show();
 

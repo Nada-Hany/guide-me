@@ -5,6 +5,7 @@
 #include <QRandomGenerator>
 #include <qcloseevent>
 //#include <QGraphicsView>
+#include<QMovie>
 
 using namespace std;
 
@@ -19,6 +20,9 @@ void toLowerCase(string& str) {
 GuideMe::GuideMe(QWidget* parent)
    : QMainWindow(parent)
 {
+
+  
+
     //same as on create func
     ui.setupUi(this);
     // Connect "openSecond" button to the slot function "on_openSecond_clicked"
@@ -41,7 +45,9 @@ GuideMe::GuideMe(QWidget* parent)
     connect(ui.mainBack, &QPushButton::clicked, this, &GuideMe::on_mainBack_clicked);
 
     ui.stackedWidget->setCurrentIndex(0);
-
+    QMovie* movie = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/airplan2.gif");
+    ui.woman_label->setMovie(movie);
+    movie->start();
 }
 
 GuideMe::~GuideMe()
@@ -60,7 +66,13 @@ void GuideMe::setGraph(Graph* graph) {
         ui.destBox->addItem(QString::fromStdString(node));
         ui.sourceBox_2->addItem(QString::fromStdString(node));
         ui.destBox_2->addItem(QString::fromStdString(node));
+        ui.allNodes->addItem(QString::fromStdString(node));
     }
+    ui.sourceBox->setCurrentIndex(-1);
+    ui.destBox->setCurrentIndex(-1);
+    ui.sourceBox_2->setCurrentIndex(-1);
+    ui.destBox_2->setCurrentIndex(-1);
+    ui.allNodes->setCurrentIndex(-1);
 
 }
 
@@ -100,11 +112,17 @@ bool GuideMe::updateVariables(string& source, string& destination, float& budget
 
 void GuideMe::on_openSecond_clicked() {
     ui.stackedWidget->setCurrentIndex(4);
+    QMovie* movie2 = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/road2.gif");
+    ui.road_label->setMovie(movie2);
+    movie2->start();
 }
 
 void GuideMe::on_openUpdate_clicked() {
     
     ui.stackedWidget->setCurrentIndex(3);
+    QMovie* movie3 = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/road2.gif");
+    ui.road_label_2->setMovie(movie3);
+    movie3->start();
 }
 void GuideMe::on_updateButton_clicked() {
     string src, dest, transportation,result;
@@ -139,10 +157,10 @@ void GuideMe::on_deleteButton_clicked() {
 }
 
 void GuideMe::on_openTraverse_clicked() {
-    for (auto& node : graph->allNodes) {
-        ui.allNodes->addItem(QString::fromStdString(node));
-    }
     ui.stackedWidget->setCurrentIndex(1);
+    QMovie* movie4 = new QMovie("C:/Users/HP/Desktop/guide-me/guide-me/img/pharaoh.gif");
+    ui.label_pharaoh->setMovie(movie4);
+    movie4->start();
 }
 
 
@@ -161,7 +179,7 @@ void GuideMe::on_openThird_clicked() {
     toLowerCase(dest);
     float budget = ui.budgetLine->text().toInt();
     if (budget == 0) {
-        ui.label->setText("please enter a valid budget");
+        ui.label->setText("Please enter a valid budget");
         return;
     }
 
@@ -181,6 +199,7 @@ void GuideMe::on_openThird_clicked() {
         }
         ui.stackedWidget->setCurrentIndex(2);
         ui.mapPaths->setText(QString::fromStdString(result));
+
     }
 
 
@@ -201,7 +220,7 @@ void GuideMe::on_openThird_2_clicked() {
 
     //nada (calling all paths function)
     if (budget == 0) {
-        ui.label->setText("please enter a valid budget");
+        ui.label->setText("Please enter a valid budget");
         return;
     }
     else {
@@ -214,14 +233,16 @@ void GuideMe::on_openThird_2_clicked() {
 void GuideMe::on_dfsButton_clicked() {
     clearUp();
     string out = "";
-    string source = ui.destBox_2->currentText().toStdString();
+    string source = ui.allNodes->currentText().toStdString();
+    toLowerCase(source);
     graph->dfs(graph->getNode(source), out);
     ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (DFS traversing map)
 }
 
 void GuideMe::on_bfsButton_clicked() {
     clearUp();
-    string source = ui.destBox_2->currentText().toStdString();
+    string source = ui.allNodes->currentText().toStdString();
+    toLowerCase(source);
     string out = graph->bfs(graph->getNode(source));
     ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (BFS traversing map)
 }
@@ -229,9 +250,9 @@ void GuideMe::on_bfsButton_clicked() {
 void GuideMe::on_completeButton_clicked() {
     bool isComplete = graph->checkCompleteness();
     if (isComplete)
-        ui.mapPathsAlgo->setText("graph is conmplete"); //nada (check complete)
+        ui.mapPathsAlgo->setText("Graph is conmplete"); //nada (check complete)
     else
-        ui.mapPathsAlgo->setText("graph isn't conmplete");
+        ui.mapPathsAlgo->setText("Graph isn't conmplete");
 }
 
 
@@ -264,44 +285,44 @@ void GuideMe::closeEvent(QCloseEvent* event){
     event->accept();
 }
 
-void GuideMe::drawGraphInStackedWidget(Graph* graph) {
-    // Get the current widget from the stacked widget
-    QWidget* currentWidget = ui.stackedWidget->currentWidget();
-    if (currentWidget != nullptr) {
-        // Set the scene to the graphics view of the current widget
-        QGraphicsView* graphicsView = currentWidget->findChild<QGraphicsView*>();
-        if (graphicsView != nullptr) {
-            QGraphicsScene* scene = graphicsView->scene();
-            if (scene == nullptr) {
-                scene = new QGraphicsScene(this);
-                graphicsView->setScene(scene);
-
-            }
-
-            int nodeSize = 20;
-
-            for (const auto& node : graph->getGraph()) {
-                QString nodeName = QString::fromStdString(node.first);
-                QPointF nodePos(QRandomGenerator::global()->bounded(graphicsView->width() - nodeSize), QRandomGenerator::global()->bounded(graphicsView->height() - nodeSize));
-                scene->addEllipse(nodePos.x() - nodeSize / 2, nodePos.y() - nodeSize / 2, nodeSize, nodeSize);
-                QGraphicsTextItem* label = scene->addText(nodeName);
-                label->setPos(nodePos.x() - nodeSize / 4, nodePos.y() - nodeSize / 4);
-
-                for (const auto& edge : node.second) {
-                    QString destNodeName = QString::fromStdString(edge.first);
-                    QPointF destNodePos;
-                    for (const auto& otherNode : graph->getGraph()) {
-                        if (otherNode.first == edge.first) {
-                            destNodePos = QPointF(QRandomGenerator::global()->bounded(graphicsView->width() - nodeSize), QRandomGenerator::global()->bounded(graphicsView->height() - nodeSize));
-                            break;
-                        }
-                    }
-                    scene->addLine(nodePos.x(), nodePos.y(), destNodePos.x(), destNodePos.y());
-                    QGraphicsTextItem* edgeLabel = scene->addText(QString::number(edge.second[0].first));
-                    edgeLabel->setPos((nodePos.x() + destNodePos.x()) / 2, (nodePos.y() + destNodePos.y()) / 2);
-
-                }
-            }
-        }
-    }
-}
+//void GuideMe::drawGraphInStackedWidget(Graph* graph) {
+//    // Get the current widget from the stacked widget
+//    QWidget* currentWidget = ui.stackedWidget->currentWidget();
+//    if (currentWidget != nullptr) {
+//        // Set the scene to the graphics view of the current widget
+//        QGraphicsView* graphicsView = currentWidget->findChild<QGraphicsView*>();
+//        if (graphicsView != nullptr) {
+//            QGraphicsScene* scene = graphicsView->scene();
+//            if (scene == nullptr) {
+//                scene = new QGraphicsScene(this);
+//                graphicsView->setScene(scene);
+//
+//            }
+//
+//            int nodeSize = 20;
+//
+//            for (const auto& node : graph->getGraph()) {
+//                QString nodeName = QString::fromStdString(node.first);
+//                QPointF nodePos(QRandomGenerator::global()->bounded(graphicsView->width() - nodeSize), QRandomGenerator::global()->bounded(graphicsView->height() - nodeSize));
+//                scene->addEllipse(nodePos.x() - nodeSize / 2, nodePos.y() - nodeSize / 2, nodeSize, nodeSize);
+//                QGraphicsTextItem* label = scene->addText(nodeName);
+//                label->setPos(nodePos.x() - nodeSize / 4, nodePos.y() - nodeSize / 4);
+//
+//                for (const auto& edge : node.second) {
+//                    QString destNodeName = QString::fromStdString(edge.first);
+//                    QPointF destNodePos;
+//                    for (const auto& otherNode : graph->getGraph()) {
+//                        if (otherNode.first == edge.first) {
+//                            destNodePos = QPointF(QRandomGenerator::global()->bounded(graphicsView->width() - nodeSize), QRandomGenerator::global()->bounded(graphicsView->height() - nodeSize));
+//                            break;
+//                        }
+//                    }
+//                    scene->addLine(nodePos.x(), nodePos.y(), destNodePos.x(), destNodePos.y());
+//                    QGraphicsTextItem* edgeLabel = scene->addText(QString::number(edge.second[0].first));
+//                    edgeLabel->setPos((nodePos.x() + destNodePos.x()) / 2, (nodePos.y() + destNodePos.y()) / 2);
+//
+//                }
+//            }
+//        }
+//    }
+//}

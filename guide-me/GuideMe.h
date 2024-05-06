@@ -8,6 +8,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 
+#include <QGraphicsEllipseItem>
+#include <QGraphicsLineItem>z
+
 class GuideMe : public QMainWindow
 {
     Q_OBJECT

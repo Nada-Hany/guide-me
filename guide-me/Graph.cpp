@@ -351,7 +351,7 @@ void Graph::validWeightedPath(Node* start, Node* dest, float budget) {
 	//path number 
 }
 
-//mariam
+//find paths with lowest price
 vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited) {
 	path.push_back(src);
 	visited.insert(src);
@@ -365,7 +365,7 @@ vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, v
 			float min_cost = MAX;
 			//iterating over all childs of a parent in each iteration
 			Node* parent = getNode(path[i]);
-			//path -> cairo-----mansoura domyat 
+			//path -> cairo-----mansoura damietta 
 			//child 
 			for (auto eachChild : adj[parent]) {
 				//path[i+1] -> represents 
