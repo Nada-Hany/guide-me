@@ -37,19 +37,16 @@ class Graph
 	bool childExist(Node*, Node*);
 	void toLowerCase(string&);
 	void getEachPath(Node*);
-	vector<vector<string>> paths;
 	
-	//mariam
-	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>> graph;
 
 public:
+	vector<vector<string>> paths;
 	set<string> allNodes;
 	int nodesNumber = 0;
 	Node* destination = nullptr;
 	unordered_map<Node*, vector<Node*>> adj;
 
 	Graph();
-	void getPaths();
 	Node* getNode(string);
 	void addEdge(string, string);
 	void addEdge(string, string, string, float, int);
@@ -62,14 +59,13 @@ public:
 	void clearPrevious();
 	bool checkCompleteness();
 	void getWeightedPaths(vector <vector< pair<vector<string>, float >> >&, float);
-	void validWeightedPath(Node*, Node*, float);
+
+	vector<pair<float, string>> getAllPaths(Node* start, Node* dest, float budget);
 
 	//mariam
 	vector<pair<vector<string>, float>> lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited);
 	float getWeight(Node* parent, Node* child);
-	unordered_map<string, vector<pair<string, vector<pair<int, string>>>>>& getGraph() {
-		return graph;
-	}
+
 	~Graph();
 };
 

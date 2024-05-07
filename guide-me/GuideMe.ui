@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
+    <width>1881</width>
     <height>1080</height>
    </rect>
   </property>
@@ -15,9 +15,10 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(36, 36, 36)
+    <string notr="true">
+					background-color:rgb(36, 36, 36)
 
-</string>
+				</string>
    </property>
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
@@ -29,13 +30,13 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="mainBack">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>690</x>
         <y>590</y>
         <width>151</width>
         <height>31</height>
@@ -50,10 +51,12 @@
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 20pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>close</string>
@@ -62,9 +65,9 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>360</x>
         <y>70</y>
-        <width>1000</width>
+        <width>821</width>
         <height>280</height>
        </rect>
       </property>
@@ -77,21 +80,22 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string>Guide Me</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
      <widget class="QPushButton" name="openTraverse">
       <property name="geometry">
        <rect>
-        <x>420</x>
+        <x>560</x>
         <y>520</y>
         <width>411</width>
         <height>50</height>
@@ -109,10 +113,12 @@ background-color: transparent;
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 20pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Traverse graph</string>
@@ -124,7 +130,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
       </property>
       <property name="geometry">
        <rect>
-        <x>420</x>
+        <x>560</x>
         <y>360</y>
         <width>411</width>
         <height>50</height>
@@ -142,10 +148,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 20pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Search on map</string>
@@ -154,7 +162,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="openUpdate">
       <property name="geometry">
        <rect>
-        <x>420</x>
+        <x>560</x>
         <y>440</y>
         <width>411</width>
         <height>50</height>
@@ -172,10 +180,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 20pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Update graph</string>
@@ -191,7 +201,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/bg.jpeg&quot;)</string>
+       <string notr="true">border-image: url(&quot;img/bg.jpeg&quot;)</string>
       </property>
       <property name="text">
        <string/>
@@ -200,16 +210,17 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QLabel" name="woman_label">
       <property name="geometry">
        <rect>
-        <x>1030</x>
-        <y>-150</y>
+        <x>980</x>
+        <y>-190</y>
         <width>231</width>
         <height>481</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: transparent;
+       <string notr="true">
+								background-color: transparent;
 
-</string>
+							</string>
       </property>
       <property name="text">
        <string>TextLabel</string>
@@ -218,10 +229,10 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
-        <x>360</x>
+        <x>565</x>
         <y>290</y>
-        <width>531</width>
-        <height>51</height>
+        <width>411</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -232,15 +243,16 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string>The best Real-Time Travel Guide App In EGYPT </string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
      <zorder>label_2</zorder>
@@ -257,7 +269,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>170</y>
+        <y>200</y>
         <width>211</width>
         <height>40</height>
        </rect>
@@ -271,10 +283,12 @@ background-color: transparent;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 18pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>DFS</string>
@@ -284,7 +298,7 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>420</y>
+        <y>450</y>
         <width>211</width>
         <height>40</height>
        </rect>
@@ -298,10 +312,12 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 18pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>COMPLETENESS</string>
@@ -311,7 +327,7 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>300</y>
+        <y>330</y>
         <width>211</width>
         <height>40</height>
        </rect>
@@ -325,10 +341,12 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 18pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>BFS</string>
@@ -337,8 +355,8 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="back4">
       <property name="geometry">
        <rect>
-        <x>700</x>
-        <y>530</y>
+        <x>750</x>
+        <y>600</y>
         <width>200</width>
         <height>40</height>
        </rect>
@@ -352,10 +370,12 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 18pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>back</string>
@@ -364,10 +384,10 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QLabel" name="mapPathsAlgo">
       <property name="geometry">
        <rect>
-        <x>410</x>
-        <y>120</y>
-        <width>581</width>
-        <height>391</height>
+        <x>320</x>
+        <y>200</y>
+        <width>711</width>
+        <height>381</height>
        </rect>
       </property>
       <property name="font">
@@ -379,23 +399,24 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-font: 600 28pt &quot;Sitka Display Semibold&quot;;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+								font: 600 28pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string/>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
      <widget class="QComboBox" name="allNodes">
       <property name="geometry">
        <rect>
-        <x>440</x>
-        <y>530</y>
+        <x>430</x>
+        <y>600</y>
         <width>200</width>
         <height>40</height>
        </rect>
@@ -409,10 +430,12 @@ font: 600 28pt &quot;Sitka Display Semibold&quot;;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 18pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="placeholderText">
        <string>source</string>
@@ -428,7 +451,7 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/bg.jpeg&quot;)</string>
+       <string notr="true">border-image: url(&quot;img/bg.jpeg&quot;)</string>
       </property>
       <property name="text">
        <string/>
@@ -437,15 +460,16 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QLabel" name="label_pharaoh">
       <property name="geometry">
        <rect>
-        <x>920</x>
+        <x>980</x>
         <y>130</y>
         <width>411</width>
         <height>391</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: transparent;
-</string>
+       <string notr="true">
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string/>
@@ -464,8 +488,8 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="back3">
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>600</y>
+        <x>570</x>
+        <y>650</y>
         <width>200</width>
         <height>40</height>
        </rect>
@@ -479,10 +503,12 @@ font: 600 18pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 17pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 17pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>back</string>
@@ -493,23 +519,24 @@ font: 600 17pt &quot;Sitka Display Semibold&quot;;</string>
        <rect>
         <x>300</x>
         <y>40</y>
-        <width>701</width>
-        <height>471</height>
+        <width>1201</width>
+        <height>531</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>26</pointsize>
+        <pointsize>22</pointsize>
         <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
-       <string> </string>
+       <string>TextLabel</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_13">
@@ -522,7 +549,7 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/bg.jpeg&quot;)</string>
+       <string notr="true">border-image: url(&quot;img/bg.jpeg&quot;)</string>
       </property>
       <property name="text">
        <string/>
@@ -536,8 +563,8 @@ background-color: transparent;
      <widget class="QGroupBox" name="groupBox_2">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>40</y>
+        <x>430</x>
+        <y>80</y>
         <width>701</width>
         <height>471</height>
        </rect>
@@ -548,9 +575,10 @@ background-color: transparent;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+							</string>
       </property>
       <property name="title">
        <string/>
@@ -573,10 +601,12 @@ background-color: transparent;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>budget</string>
@@ -600,10 +630,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>source</string>
@@ -627,10 +659,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>destination</string>
@@ -654,10 +688,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>transportation</string>
@@ -673,7 +709,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
         </rect>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::PreventContextMenu</enum>
+        <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
        </property>
        <property name="text">
         <string>TextLabel</string>
@@ -688,8 +724,8 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="updateButton">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>600</y>
+        <x>450</x>
+        <y>590</y>
         <width>200</width>
         <height>40</height>
        </rect>
@@ -703,10 +739,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Update</string>
@@ -715,8 +753,8 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="addButton">
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>600</y>
+        <x>690</x>
+        <y>590</y>
         <width>200</width>
         <height>40</height>
        </rect>
@@ -730,10 +768,12 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Add</string>
@@ -742,8 +782,8 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="deleteButton">
       <property name="geometry">
        <rect>
-        <x>800</x>
-        <y>600</y>
+        <x>920</x>
+        <y>590</y>
         <width>200</width>
         <height>40</height>
        </rect>
@@ -757,10 +797,12 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Delete</string>
@@ -769,7 +811,7 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="back5">
       <property name="geometry">
        <rect>
-        <x>590</x>
+        <x>730</x>
         <y>650</y>
         <width>131</width>
         <height>31</height>
@@ -784,10 +826,12 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>back</string>
@@ -809,9 +853,10 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string/>
@@ -827,7 +872,7 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;C:/Users/HP/Desktop/guide-me/guide-me/img/bg.jpeg&quot;)</string>
+       <string notr="true">border-image: url(&quot;img/bg.jpeg&quot;)</string>
       </property>
       <property name="text">
        <string/>
@@ -843,9 +888,10 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
-background-color: transparent;
-</string>
+       <string notr="true">
+								border-image: url(&quot;img/pointer.png&quot;);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string/>
@@ -861,9 +907,10 @@ background-color: transparent;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
-background-color: transparent;
-</string>
+       <string notr="true">
+								border-image: url(&quot;img/pointer.png&quot;);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string/>
@@ -898,10 +945,11 @@ background-color: transparent;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+								font: 600 20pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string/>
@@ -910,7 +958,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;
      <widget class="QPushButton" name="openThird">
       <property name="geometry">
        <rect>
-        <x>560</x>
+        <x>630</x>
         <y>600</y>
         <width>200</width>
         <height>40</height>
@@ -925,10 +973,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>Paths with lowest price</string>
@@ -937,7 +987,7 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QPushButton" name="back2">
       <property name="geometry">
        <rect>
-        <x>800</x>
+        <x>870</x>
         <y>600</y>
         <width>200</width>
         <height>40</height>
@@ -952,10 +1002,12 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>back</string>
@@ -964,10 +1016,10 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>40</y>
-        <width>701</width>
-        <height>471</height>
+        <x>370</x>
+        <y>70</y>
+        <width>711</width>
+        <height>491</height>
        </rect>
       </property>
       <property name="font">
@@ -976,9 +1028,10 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:rgb(131, 131, 131);
-background-color: transparent;
-</string>
+       <string notr="true">
+								color:rgb(131, 131, 131);
+								background-color: transparent;
+							</string>
       </property>
       <property name="title">
        <string/>
@@ -986,8 +1039,8 @@ background-color: transparent;
       <widget class="QLineEdit" name="budgetLine">
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>300</y>
+         <x>310</x>
+         <y>420</y>
          <width>110</width>
          <height>31</height>
         </rect>
@@ -1001,13 +1054,15 @@ background-color: transparent;
         </font>
        </property>
        <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
+        <enum>Qt::LayoutDirection::LeftToRight</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>budget</string>
@@ -1016,7 +1071,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
       <widget class="QComboBox" name="sourceBox">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>70</x>
          <y>420</y>
          <width>150</width>
          <height>31</height>
@@ -1031,10 +1086,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>souse</string>
@@ -1043,7 +1100,7 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
       <widget class="QComboBox" name="destBox">
        <property name="geometry">
         <rect>
-         <x>350</x>
+         <x>400</x>
          <y>40</y>
          <width>150</width>
          <height>31</height>
@@ -1058,10 +1115,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
+        <string notr="true">
+									background-color: rgb(255, 255, 255);
+									color: rgb(131, 131, 131);
+									border-radius: 10px;
+									font: 600 20pt &quot;Sitka Display Semibold&quot;;
+								</string>
        </property>
        <property name="placeholderText">
         <string>destination</string>
@@ -1070,28 +1129,48 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
       <widget class="QLabel" name="road_label">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>15</y>
-         <width>591</width>
+         <x>110</x>
+         <y>20</y>
+         <width>511</width>
          <height>451</height>
         </rect>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::PreventContextMenu</enum>
+        <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
        </property>
        <property name="text">
         <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>-20</y>
+         <width>231</width>
+         <height>181</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+									border-image: url(&quot;img/pointer.png&quot;);
+									background-color: transparent;
+								</string>
+       </property>
+       <property name="text">
+        <string/>
        </property>
       </widget>
       <zorder>road_label</zorder>
       <zorder>budgetLine</zorder>
       <zorder>destBox</zorder>
       <zorder>sourceBox</zorder>
+      <zorder>label_4</zorder>
      </widget>
      <widget class="QPushButton" name="openThird_2">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>390</x>
         <y>600</y>
         <width>200</width>
         <height>40</height>
@@ -1106,10 +1185,12 @@ font: 600 20pt &quot;Sitka Display Semibold&quot;;</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(131, 131, 131);
-border-radius: 10px;
-font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
+       <string notr="true">
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
+							</string>
       </property>
       <property name="text">
        <string>All paths</string>
@@ -1141,27 +1222,10 @@ font: 600 14pt &quot;Sitka Display Semibold&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
-background-color: transparent;
-</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>720</x>
-        <y>-30</y>
-        <width>251</width>
-        <height>181</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-image: url(&quot;img/pointer.png&quot;);
-background-color: transparent;
-</string>
+       <string notr="true">
+								border-image: url(&quot;img/pointer.png&quot;);
+								background-color: transparent;
+							</string>
       </property>
       <property name="text">
        <string/>
@@ -1174,29 +1238,9 @@ background-color: transparent;
      <zorder>groupBox</zorder>
      <zorder>openThird_2</zorder>
      <zorder>label_3</zorder>
-     <zorder>label_4</zorder>
     </widget>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1920</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

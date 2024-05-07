@@ -32,20 +32,6 @@ void File::readFile() {
 		file.close();
 	}
 }
-
-void File::convertToObjects(Graph* graph) {
-
-	for (auto line : data) {
-		if (line.size() < 2)
-		{
-			graph->nodesNumber = stod(line[0]);
-			continue;
-		}
-		graph->addEdge(line[0], line[1]);
-		graph->allNodes.insert(line[0]);
-		graph->allNodes.insert(line[1]);
-	}
-}
 void File::writeOnFile(Graph* graph) {
 	ofstream file("TransportationMap.txt");
 	vector<pair<string, string>> addedNodes;
@@ -72,7 +58,8 @@ void File::writeOnFile(Graph* graph) {
 		file.close();
 	}
 }
-void File::convertWeights(Graph* graph) {
+
+void File::convertToObjects(Graph* graph) {
 
 	for (auto line : data) {
 		if (line.size() < 2)

@@ -1,6 +1,6 @@
 5
-giza - cairo metro 30 bus 60 uber 230 
 giza - dahab bus 500 microbus 345 
+giza - cairo metro 30 bus 60 uber 230 
 dahab - benisuef microbus 200 bus 315 
-cairo - benisuef microbus 20 bus 15 
+benisuef - cairo microbus 20 bus 15 
 cairo - asyut train 250 bus 450 

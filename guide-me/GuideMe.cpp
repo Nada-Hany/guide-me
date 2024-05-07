@@ -4,8 +4,9 @@
 #include <iterator> 
 #include <QRandomGenerator>
 #include <qcloseevent>
-//#include <QGraphicsView>
 #include<QMovie>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -20,9 +21,6 @@ void toLowerCase(string& str) {
 GuideMe::GuideMe(QWidget* parent)
    : QMainWindow(parent)
 {
-
-  
-
     //same as on create func
     ui.setupUi(this);
     // Connect "openSecond" button to the slot function "on_openSecond_clicked"
@@ -81,7 +79,6 @@ void GuideMe::setFile(File* f)
     this->file = f;
 }
 
-
 bool GuideMe::updateVariables(string& source, string& destination, float& budget, string& transportation, int action) {
     source = ui.sourceBox_2->currentText().toStdString();
     destination = ui.destBox_2->currentText().toStdString();
@@ -92,23 +89,26 @@ bool GuideMe::updateVariables(string& source, string& destination, float& budget
     toLowerCase(transportation);
     Node* src = graph->getNode(source);
     Node* dest = graph->getNode(destination);
-    switch (action)
+    if (!(transportation.empty() && budget == 0))
     {
-    //add
-    case 1:
-        return src->addWeight(src, dest, budget, transportation);
-    //delete
-    case 2:
-        return src->deleteWeight(src, dest,transportation);
-    //modify 
-    case 3:
-        return src->changeWeightValue(src->weights[dest], budget, transportation);
-    default:
-        break;
+        switch (action)
+        {
+            //add
+        case 1:
+            return src->addWeight(src, dest, budget, transportation);
+            //delete
+        case 2:
+            return src->deleteWeight(src, dest, transportation);
+            //modify 
+        case 3:
+            return src->changeWeightValue(src->weights[dest], budget, transportation);
+        default:
+            break;
+        }
     }
+    delete src, dest;
     return false;
 }
-
 
 void GuideMe::on_openSecond_clicked() {
     ui.stackedWidget->setCurrentIndex(4);
@@ -163,7 +163,6 @@ void GuideMe::on_openTraverse_clicked() {
     movie4->start();
 }
 
-
 void GuideMe::on_openThird_clicked() {
     vector<string> pathS;
     set<string> visitS;
@@ -182,7 +181,6 @@ void GuideMe::on_openThird_clicked() {
         ui.label->setText("Please enter a valid budget");
         return;
     }
-
     vector<pair<vector<string>, float>> paths = graph->lowestPath(src, dest, pathS, budget, visitS);
 
     if (paths.empty()) {
@@ -195,14 +193,13 @@ void GuideMe::on_openThird_clicked() {
             for (const string& node : path.first) {
                 result += node + " ";
             }
-            result += "\nBudget: " + to_string(path.second) + "\n";
+            stringstream ss;
+            ss << fixed << setprecision(2) << path.second;
+            result += "\nBudget: " + ss.str() + "\n";
         }
         ui.stackedWidget->setCurrentIndex(2);
         ui.mapPaths->setText(QString::fromStdString(result));
-
     }
-
-
 }
 
 void GuideMe::on_openThird_2_clicked() {
@@ -213,37 +210,60 @@ void GuideMe::on_openThird_2_clicked() {
     }
 
     string src = ui.sourceBox->currentText().toStdString();
-    toLowerCase(src);
+    Node* srcNode = graph->getNode(src);
     string dest = ui.destBox->currentText().toStdString();
-    toLowerCase(dest);
+    Node* destNode = graph->getNode(dest);
     float budget = ui.budgetLine->text().toInt();
-
-    //nada (calling all paths function)
     if (budget == 0) {
         ui.label->setText("Please enter a valid budget");
         return;
     }
+    if(srcNode!=destNode)
+    {
+        clearUp();
+        vector<pair<float, string>> paths = graph->getAllPaths(srcNode, destNode, budget);
+        if (paths.empty()) {
+            ui.label->setText("No path found within budget");
+        }
+        else {
+            string result = "Paths:\n";
+            for (auto path : paths)
+            {
+                stringstream ss;
+                ss << fixed << setprecision(2) << path.first;
+                result = result + path.second + " -> " + ss.str() + " LE\n";
+            }
+            ui.stackedWidget->setCurrentIndex(2);
+            ui.mapPaths->setText(QString::fromStdString(result));
+
+        }
+    }
     else {
-        ui.stackedWidget->setCurrentIndex(2);
+        QMessageBox::information(this, "Error", "Please select a different source/destination.");
     }
 
 }
 
-
 void GuideMe::on_dfsButton_clicked() {
     clearUp();
-    string out = "";
     string source = ui.allNodes->currentText().toStdString();
     toLowerCase(source);
-    graph->dfs(graph->getNode(source), out);
-    ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (DFS traversing map)
+    if(!source.empty())
+    {
+        string out = "";
+        graph->dfs(graph->getNode(source), out);
+        ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (DFS traversing map)
+    }else
+        ui.mapPathsAlgo->setText(QString::fromStdString("choose a city")); 
+
 }
 
 void GuideMe::on_bfsButton_clicked() {
     clearUp();
-    string source = ui.allNodes->currentText().toStdString();
+    string source = ui.allNodes->currentText().toStdString(), out ="choose city";
     toLowerCase(source);
-    string out = graph->bfs(graph->getNode(source));
+    if(!source.empty())
+        out = graph->bfs(graph->getNode(source));
     ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (BFS traversing map)
 }
 
@@ -254,7 +274,6 @@ void GuideMe::on_completeButton_clicked() {
     else
         ui.mapPathsAlgo->setText("Graph isn't conmplete");
 }
-
 
 void GuideMe::on_back2_clicked() {
     ui.stackedWidget->setCurrentIndex(0);
@@ -271,58 +290,19 @@ void GuideMe::on_back5_clicked() {
 
 void GuideMe::on_mainBack_clicked(){
     this->file->writeOnFile(graph);
+    delete file, graph;
     this->close();
 }
 
 void GuideMe::clearUp() {
     graph->clearPrevious();
     graph->clearVisted();
+    graph->paths.clear();
 }
 
 void GuideMe::closeEvent(QCloseEvent* event){
 
     file->writeOnFile(graph);
+    delete file, graph;
     event->accept();
 }
-
-//void GuideMe::drawGraphInStackedWidget(Graph* graph) {
-//    // Get the current widget from the stacked widget
-//    QWidget* currentWidget = ui.stackedWidget->currentWidget();
-//    if (currentWidget != nullptr) {
-//        // Set the scene to the graphics view of the current widget
-//        QGraphicsView* graphicsView = currentWidget->findChild<QGraphicsView*>();
-//        if (graphicsView != nullptr) {
-//            QGraphicsScene* scene = graphicsView->scene();
-//            if (scene == nullptr) {
-//                scene = new QGraphicsScene(this);
-//                graphicsView->setScene(scene);
-//
-//            }
-//
-//            int nodeSize = 20;
-//
-//            for (const auto& node : graph->getGraph()) {
-//                QString nodeName = QString::fromStdString(node.first);
-//                QPointF nodePos(QRandomGenerator::global()->bounded(graphicsView->width() - nodeSize), QRandomGenerator::global()->bounded(graphicsView->height() - nodeSize));
-//                scene->addEllipse(nodePos.x() - nodeSize / 2, nodePos.y() - nodeSize / 2, nodeSize, nodeSize);
-//                QGraphicsTextItem* label = scene->addText(nodeName);
-//                label->setPos(nodePos.x() - nodeSize / 4, nodePos.y() - nodeSize / 4);
-//
-//                for (const auto& edge : node.second) {
-//                    QString destNodeName = QString::fromStdString(edge.first);
-//                    QPointF destNodePos;
-//                    for (const auto& otherNode : graph->getGraph()) {
-//                        if (otherNode.first == edge.first) {
-//                            destNodePos = QPointF(QRandomGenerator::global()->bounded(graphicsView->width() - nodeSize), QRandomGenerator::global()->bounded(graphicsView->height() - nodeSize));
-//                            break;
-//                        }
-//                    }
-//                    scene->addLine(nodePos.x(), nodePos.y(), destNodePos.x(), destNodePos.y());
-//                    QGraphicsTextItem* edgeLabel = scene->addText(QString::number(edge.second[0].first));
-//                    edgeLabel->setPos((nodePos.x() + destNodePos.x()) / 2, (nodePos.y() + destNodePos.y()) / 2);
-//
-//                }
-//            }
-//        }
-//    }
-//}

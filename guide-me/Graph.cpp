@@ -178,15 +178,13 @@ void Graph::addEdge(string node1, string node2) {
 string Graph::bfs(Node* node) {
 	queue<Node*> open;
 	open.push(node);
-	string out="";
+	string out = "";
 	while (open.size())
 	{
 		Node* current = open.front();
 		open.pop();
-	//	cout << current->value << "\t";
 		out = out + current->value + " ";
 		current->isVisted = true;
-
 		for (Node* child : adj[current])
 			if (!child->isVisted && !inOpen(child, open))
 				open.push(child);
@@ -244,14 +242,6 @@ void Graph::getEachPath(Node* dest) {
 	}
 	paths.push_back(path);
 }
-void Graph::getPaths() {
-	for (auto& path : paths) {
-		for (float i = path.size() - 1; i >= 0; i--) {
-		//	cout << path[i] << " ";
-		}
-		//cout << el;
-	}
-}
 
 Node* Graph::getNode(string value) {
 	for (auto& node : adj) {
@@ -294,10 +284,10 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 	bool firstTime = true;
 	//each possible path
 	vector <string> test;
-	for (auto eachPath : paths) {
+	for (auto& eachPath : paths) {
 		bool firstTime = true;
 		//each node for each path
-		for (float i = eachPath.size() - 2; i >= 0; i--) {
+		for (int i = eachPath.size() - 2; i >= 0; i--) {
 			Node* node1 = getNode(eachPath[i]);
 			Node* node2 = getNode(eachPath[i + 1]);
 			vector<pair <vector< string>, float >> tmp;
@@ -305,6 +295,7 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 			vector<string> ways;
 			//all weight types for each edge 
 			for (auto weight : node1->weights[node2]) {
+				ways.clear();
 				if (weight.second > budget)
 					continue;
 				ways.push_back(weight.first);
@@ -318,24 +309,18 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 			}
 			//final -> 1st edge , tmp -> 2nd edge >> add on final /
 			else {
-				float outer = -1;
-				//getting combinations
-				for (auto n1 : final) {
-					float inner = -1;
-					outer++;
-					for (auto n2 : tmp) {
+				for (int outer = 0; outer < final.size(); outer++) {
+					for (int inner = 0; inner < tmp.size(); inner++) {
 						vector<string> weightType;
-						inner++;
 						//valid combin.
-						if (n1.second + n2.second <= budget) {
+						if (final[outer].second + tmp[inner].second <= budget) {
 
-							weightType.push_back(n1.first[outer]);
-							weightType.push_back(n2.first[inner]);
-							combinations.push_back(make_pair(weightType, n1.second + n2.second));
+							final[outer].first.push_back(tmp[inner].first[0]);
+							final[outer].second += tmp[inner].second;
 						}
 					}
-
 				}
+
 			}
 		}
 		/*next iteration -> another path*/
@@ -343,15 +328,36 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 	}
 }
 
-void Graph::validWeightedPath(Node* start, Node* dest, float budget) {
+vector<pair<float, string>> Graph::getAllPaths(Node* start, Node* dest, float budget) {
+	vector<pair<float, string>> out;
 	dfs(start, dest);
-	vector <vector< pair<vector<string>, float >> >path;
-	//getWeightedPaths(path, budget);
-	float j = 0;
-	//path number 
+	vector <vector< pair<vector<string>, float >> > p;
+	getWeightedPaths(p, budget);
+	for (int i = 0; i < p.size(); i++) {
+		for (auto allWeights : p[i]) {
+			string s = "";
+			int indWeight = 0;
+			if (allWeights.first.size() != paths[i].size() - 1)
+				continue;
+			if (paths[i].size() > 2)
+			{
+				s = s + paths[i][paths[i].size() - 1] + " ";
+				for (int nodeInd = paths[i].size() - 2; nodeInd >= 0; nodeInd--) {
+					s = s + allWeights.first[indWeight] + " " + paths[i][nodeInd] + " ";
+					indWeight++;
+				}
+			}
+			else {
+				s = s + paths[i][1] + " ";
+				s = s + allWeights.first[0] + " " + paths[i][0] + " ";
+			}
+			out.push_back(make_pair(allWeights.second, s));
+		}
+	}
+	sort(out.begin(), out.end());
+	return out;
 }
-
-//find paths with lowest price
+//find paths with lowest price  -- mariam
 vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited) {
 	path.push_back(src);
 	visited.insert(src);
