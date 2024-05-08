@@ -7,6 +7,7 @@
 #include <QMovie>
 #include <sstream>
 #include <iomanip>
+#include <QFontDatabase>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ void toLowerCase(string& str) {
 GuideMe::GuideMe(QWidget* parent)
    : QMainWindow(parent)
 {
+
     //same as on create func
     ui.setupUi(this);
     // Connect "openSecond" button to the slot function "on_openSecond_clicked"
@@ -41,6 +43,12 @@ GuideMe::GuideMe(QWidget* parent)
     connect(ui.back4, &QPushButton::clicked, this, &GuideMe::on_back4_clicked);
     connect(ui.back5, &QPushButton::clicked, this, &GuideMe::on_back5_clicked);
     connect(ui.mainBack, &QPushButton::clicked, this, &GuideMe::on_mainBack_clicked);
+
+    QFontDatabase fontDb;
+    int fontId = fontDb.addApplicationFont("img/GeorgiaPro-CondBold.ttf");
+    QFont font;
+    font.setFamily(fontDb.applicationFontFamilies(fontId).at(0));
+    ui.label_10->setFont(font);
 
     ui.stackedWidget->setCurrentIndex(0);
     QMovie* movie = new QMovie("img/airplan2.gif");

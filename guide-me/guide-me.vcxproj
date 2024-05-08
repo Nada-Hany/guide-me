@@ -105,6 +105,9 @@
   <ItemGroup>
     <Text Include="TransportationMap.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\..\digity\fonts\public domain use\georgia-pro-cond-cufonfonts\GeorgiaPro-CondBold.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />

@@ -61,4 +61,9 @@
   <ItemGroup>
     <Text Include="TransportationMap.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\..\digity\fonts\public domain use\georgia-pro-cond-cufonfonts\GeorgiaPro-CondBold.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
 </Project>
