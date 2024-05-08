@@ -2,18 +2,26 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_GuideMe.h"
-#include "graph.h"
-#include "File.h"
 #include <QGraphicsView> // really?
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
-
 #include <QGraphicsEllipseItem>
-#include <QGraphicsLineItem>z
+#include <QGraphicsLineItem>
+
+#include "graph.h"
+#include "File.h"
+#include <stack>
 
 class GuideMe : public QMainWindow
 {
     Q_OBJECT
+    Ui::GuideMeClass ui;
+    Graph* graph; // Add the graph member variable
+    File* file;
+    int actionMade = -1;
+    //first -> action , second.first -> nodes[.first>start, .second>target], second.second ->[.first>weight, .second>way]
+    stack<pair<int, pair<pair<Node*, Node*>, pair<float, string>>>> actions;
+    stack<float> previousWeight;
 
 public:
     GuideMe(QWidget* parent = nullptr);
@@ -49,6 +57,8 @@ public:
 
     void on_deleteButton_clicked();
 
+    void on_undoButton_clicked();
+
     void on_openTraverse_clicked();
 
     void on_dfsButton_clicked();
@@ -59,14 +69,6 @@ public:
 
     void drawGraphInStackedWidget(Graph* graph);
 
-
-  //  void displayGraph(const Graph& graph);
-
-private:
-    Ui::GuideMeClass ui;
-    Graph* graph; // Add the graph member variable
-    File* file;
-public:
     void setGraph(Graph* graph);
     void setFile(File*);
 };

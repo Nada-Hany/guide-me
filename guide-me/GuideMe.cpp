@@ -35,7 +35,7 @@ GuideMe::GuideMe(QWidget* parent)
     connect(ui.updateButton, &QPushButton::clicked, this, &GuideMe::on_updateButton_clicked);
     connect(ui.deleteButton, &QPushButton::clicked, this, &GuideMe::on_deleteButton_clicked);
     connect(ui.addButton, &QPushButton::clicked, this, &GuideMe::on_addButton_clicked);
-
+    connect(ui.undoButton, &QPushButton::clicked, this, &GuideMe::on_undoButton_clicked);
     connect(ui.back2, &QPushButton::clicked, this, &GuideMe::on_back2_clicked);
     connect(ui.back3, &QPushButton::clicked, this, &GuideMe::on_back3_clicked);
     connect(ui.back4, &QPushButton::clicked, this, &GuideMe::on_back4_clicked);
@@ -79,14 +79,18 @@ void GuideMe::setFile(File* f)
     this->file = f;
 }
 
+void GuideMe::on_openSecond_clicked() {
+    ui.stackedWidget->setCurrentIndex(4);
+    QMovie* movie2 = new QMovie("img/road2.gif");
+    ui.road_label->setMovie(movie2);
+    movie2->start();
+}
+
 bool GuideMe::updateVariables(string& source, string& destination, float& budget, string& transportation, int action) {
     source = ui.sourceBox_2->currentText().toStdString();
     destination = ui.destBox_2->currentText().toStdString();
     budget = ui.budgetLine_2->text().toFloat();
     transportation = ui.transLine->text().toStdString();
-    toLowerCase(source);
-    toLowerCase(destination);
-    toLowerCase(transportation);
     Node* src = graph->getNode(source);
     Node* dest = graph->getNode(destination);
     if (!(transportation.empty() && budget == 0))
@@ -110,13 +114,6 @@ bool GuideMe::updateVariables(string& source, string& destination, float& budget
     return false;
 }
 
-void GuideMe::on_openSecond_clicked() {
-    ui.stackedWidget->setCurrentIndex(4);
-    QMovie* movie2 = new QMovie("img/road2.gif");
-    ui.road_label->setMovie(movie2);
-    movie2->start();
-}
-
 void GuideMe::on_openUpdate_clicked() {
     
     ui.stackedWidget->setCurrentIndex(3);
@@ -128,8 +125,16 @@ void GuideMe::on_updateButton_clicked() {
     string src, dest, transportation,result;
     float budget;
     bool check = updateVariables(src, dest, budget, transportation, 3);
+    Node* srcNode = graph->getNode(src);
+    Node* destNode = graph->getNode(dest);
     if (check)
+    {
+        actionMade = 3;
+        float weight = graph->getCurrentWeight(srcNode->weights[destNode], transportation);
+        previousWeight.push(weight);
+        actions.push(make_pair(actionMade, make_pair(make_pair(srcNode, destNode), make_pair(budget, transportation))));
         result = "UPDATED"; //nada (check updated or not )
+    }
     else
         result = "There's no such edge";
     ui.updateLabel->setText(QString::fromStdString(result));
@@ -138,8 +143,14 @@ void GuideMe::on_addButton_clicked() {
     string src, dest, transportation, result;
     float budget;
     bool check = updateVariables(src, dest, budget, transportation, 1);
+    Node* srcNode = graph->getNode(src);
+    Node* destNode = graph->getNode(dest);
     if (check)
+    {
+        actionMade = 1;
+        actions.push(make_pair(actionMade, make_pair(make_pair(srcNode, destNode), make_pair(budget, transportation))));
         result = "ADDED"; //nada (check added or not )
+    }
     else
         result = "try again";
     ui.updateLabel->setText(QString::fromStdString(result));
@@ -148,14 +159,42 @@ void GuideMe::on_deleteButton_clicked() {
     string src, dest, transportation, result;
     float budget;
     bool check = updateVariables(src, dest, budget, transportation, 2);
+    Node* srcNode = graph->getNode(src);
+    Node* destNode = graph->getNode(dest);
     //nada (check deleted or not )
     if (check)
+    {
+        actionMade = 2;
+        actions.push(make_pair(actionMade, make_pair(make_pair(srcNode, destNode), make_pair(budget, transportation))));
         result = "edge deleted";
+    }
     else
         result = "edge does't exist";
     ui.updateLabel->setText(QString::fromStdString(result));
 }
+void GuideMe::on_undoButton_clicked() {
+    // [1->ADD -> delete][2->DELETE -> add][3->MODIFY]
+    if (actions.size() != 0)
+    {
+        if (actions.top().first == 1) {
+            actions.top().second.first.first->deleteWeight(actions.top().second.first.first, actions.top().second.first.second, actions.top().second.second.second);
+            ui.updateLabel->setText("edge deleted");
+        }
+        else if (actions.top().first == 2) {
+            actions.top().second.first.first->addWeight(actions.top().second.first.first, actions.top().second.first.second, actions.top().second.second.first, actions.top().second.second.second);
+            ui.updateLabel->setText("edge added");
+        }
+        else if (actions.top().first == 3) {
+            actions.top().second.first.first->changeWeightValue(actions.top().second.first.first->weights[actions.top().second.first.second], previousWeight.top(), actions.top().second.second.second);
+            previousWeight.pop();
+            ui.updateLabel->setText("edge modified");
+        }
+        actions.pop();
+    }
+    else
+        ui.updateLabel->setText("no actions were made");
 
+}
 void GuideMe::on_openTraverse_clicked() {
     ui.stackedWidget->setCurrentIndex(1);
     QMovie* movie4 = new QMovie("img/pharaoh.gif");

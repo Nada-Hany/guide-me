@@ -566,7 +566,7 @@
         <x>430</x>
         <y>80</y>
         <width>701</width>
-        <height>471</height>
+        <height>481</height>
        </rect>
       </property>
       <property name="font">
@@ -586,10 +586,10 @@
       <widget class="QLineEdit" name="budgetLine_2">
        <property name="geometry">
         <rect>
-         <x>360</x>
+         <x>410</x>
          <y>300</y>
-         <width>110</width>
-         <height>31</height>
+         <width>180</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -607,6 +607,9 @@
 									border-radius: 10px;
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
        <property name="placeholderText">
         <string>budget</string>
@@ -615,10 +618,10 @@
       <widget class="QComboBox" name="sourceBox_2">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>40</x>
          <y>420</y>
-         <width>110</width>
-         <height>31</height>
+         <width>160</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -637,6 +640,9 @@
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
        </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::SizeAdjustPolicy::AdjustToContentsOnFirstShow</enum>
+       </property>
        <property name="placeholderText">
         <string>source</string>
        </property>
@@ -644,10 +650,10 @@
       <widget class="QComboBox" name="destBox_2">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>40</y>
-         <width>150</width>
-         <height>31</height>
+         <x>330</x>
+         <y>50</y>
+         <width>160</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -673,10 +679,10 @@
       <widget class="QLineEdit" name="transLine">
        <property name="geometry">
         <rect>
-         <x>360</x>
+         <x>410</x>
          <y>260</y>
-         <width>171</width>
-         <height>31</height>
+         <width>180</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -695,6 +701,9 @@
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
        <property name="placeholderText">
         <string>transportation</string>
        </property>
@@ -702,10 +711,10 @@
       <widget class="QLabel" name="road_label_2">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>15</y>
-         <width>591</width>
-         <height>451</height>
+         <x>100</x>
+         <y>60</y>
+         <width>561</width>
+         <height>381</height>
         </rect>
        </property>
        <property name="contextMenuPolicy">
@@ -715,11 +724,31 @@
         <string>TextLabel</string>
        </property>
       </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>-40</y>
+         <width>251</width>
+         <height>181</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+								border-image: url(&quot;img/pointer.png&quot;);
+								background-color: transparent;
+							</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
       <zorder>road_label_2</zorder>
       <zorder>budgetLine_2</zorder>
       <zorder>destBox_2</zorder>
       <zorder>sourceBox_2</zorder>
       <zorder>transLine</zorder>
+      <zorder>label_6</zorder>
      </widget>
      <widget class="QPushButton" name="updateButton">
       <property name="geometry">
@@ -811,7 +840,7 @@
      <widget class="QPushButton" name="back5">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>840</x>
         <y>650</y>
         <width>131</width>
         <height>31</height>
@@ -840,14 +869,15 @@
      <widget class="QLabel" name="updateLabel">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>515</y>
-        <width>561</width>
-        <height>81</height>
+        <x>430</x>
+        <y>550</y>
+        <width>511</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
+        <pointsize>12</pointsize>
         <italic>false</italic>
         <bold>true</bold>
        </font>
@@ -878,30 +908,40 @@
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_5">
+     <widget class="QPushButton" name="undoButton">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>350</y>
-        <width>251</width>
-        <height>181</height>
+        <x>600</x>
+        <y>650</y>
+        <width>131</width>
+        <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Sitka Display Semibold</family>
+        <pointsize>14</pointsize>
+        <italic>false</italic>
+        <fontweight>DemiBold</fontweight>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">
-								border-image: url(&quot;img/pointer.png&quot;);
-								background-color: transparent;
+								background-color: rgb(255, 255, 255);
+								color: rgb(131, 131, 131);
+								border-radius: 10px;
+								font: 600 14pt &quot;Sitka Display Semibold&quot;;
 							</string>
       </property>
       <property name="text">
-       <string/>
+       <string>undo</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>720</x>
-        <y>-30</y>
+        <x>250</x>
+        <y>410</y>
         <width>251</width>
         <height>181</height>
        </rect>
@@ -923,8 +963,8 @@
      <zorder>deleteButton</zorder>
      <zorder>back5</zorder>
      <zorder>updateLabel</zorder>
+     <zorder>undoButton</zorder>
      <zorder>label_5</zorder>
-     <zorder>label_6</zorder>
     </widget>
     <widget class="QWidget" name="find">
      <widget class="QLabel" name="label">
@@ -1018,7 +1058,7 @@
        <rect>
         <x>370</x>
         <y>70</y>
-        <width>711</width>
+        <width>701</width>
         <height>491</height>
        </rect>
       </property>
@@ -1041,8 +1081,8 @@
         <rect>
          <x>310</x>
          <y>420</y>
-         <width>110</width>
-         <height>31</height>
+         <width>140</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -1064,6 +1104,9 @@
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
+       </property>
        <property name="placeholderText">
         <string>budget</string>
        </property>
@@ -1073,8 +1116,8 @@
         <rect>
          <x>70</x>
          <y>420</y>
-         <width>150</width>
-         <height>31</height>
+         <width>180</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -1094,7 +1137,7 @@
 								</string>
        </property>
        <property name="placeholderText">
-        <string>souse</string>
+        <string>source</string>
        </property>
       </widget>
       <widget class="QComboBox" name="destBox">
@@ -1102,8 +1145,8 @@
         <rect>
          <x>400</x>
          <y>40</y>
-         <width>150</width>
-         <height>31</height>
+         <width>180</width>
+         <height>35</height>
         </rect>
        </property>
        <property name="font">
@@ -1131,7 +1174,7 @@
         <rect>
          <x>110</x>
          <y>20</y>
-         <width>511</width>
+         <width>441</width>
          <height>451</height>
         </rect>
        </property>
@@ -1146,8 +1189,8 @@
        <property name="geometry">
         <rect>
          <x>510</x>
-         <y>-20</y>
-         <width>231</width>
+         <y>-40</y>
+         <width>251</width>
          <height>181</height>
         </rect>
        </property>
@@ -1215,8 +1258,8 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>350</y>
+        <x>230</x>
+        <y>390</y>
         <width>251</width>
         <height>181</height>
        </rect>

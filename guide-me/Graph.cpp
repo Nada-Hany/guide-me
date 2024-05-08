@@ -278,6 +278,14 @@ void Graph::clearVisted() {
 		node.first->isVisted = false;
 }
 
+float Graph::getCurrentWeight(vector<pair<string, float>> allweights, string transport) {
+	for (auto& t : allweights) {
+		if (transport == t.first)
+			return t.second;
+	}
+	return -1;
+}
+
 //dont ask me abt complexity pls 
 void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& allPaths, float budget) {
 	vector < pair<vector<string>, float>>final;
@@ -394,7 +402,7 @@ vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, v
 		Node* srcNode = getNode(src);
 		for (auto neighbor : adj[srcNode]) {
 
-			if (visited.find(neighbor->value) == visited.end() && budget >= getWeight(srcNode,neighbor)) { //check the DFS s not called 4 visited node
+			if (visited.find(neighbor->value) == visited.end() && budget >= getLeastWeight(srcNode,neighbor)) { //check the DFS s not called 4 visited node
 				vector<string> new_path = path;
 				set<string> new_visited = visited;
 				vector<pair<vector<string>, float>> sub_paths = lowestPath(neighbor->value, dest, new_path, budget, new_visited);
@@ -409,19 +417,19 @@ vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, v
 	return result;
 }
 
-float Graph::getWeight(Node * parent, Node * child) {
-	int max = MAX;
+float Graph::getLeastWeight(Node * parent, Node * child) {
+	int min = MAX;
 	for (auto& childs : adj[parent]) {
 		if(child->value == childs->value)
 		{
 			for (auto& weight : child->weights[parent]) {
-				if (weight.second <= max) {
-					max = weight.second;
+				if (weight.second <= min) {
+					min = weight.second;
 				}
 			}
 		}
 	}
-	return max;
+	return min;
 }
 
 Graph::~Graph() {}

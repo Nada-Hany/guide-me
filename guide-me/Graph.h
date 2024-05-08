@@ -12,12 +12,11 @@ using namespace std;
 
 class Node
 {
-
 public:
 
+	string value;
 	Node* previous = nullptr;
 	unordered_map<Node*, vector<pair<string, float>>> weights;
-	string value;
 
 	bool isVisted = false;
 	int weightExist(Node*, Node*, string);
@@ -38,10 +37,10 @@ class Graph
 	void toLowerCase(string&);
 	void getEachPath(Node*);
 	
-
 public:
-	vector<vector<string>> paths;
+
 	set<string> allNodes;
+	vector<vector<string>> paths;
 	int nodesNumber = 0;
 	Node* destination = nullptr;
 	unordered_map<Node*, vector<Node*>> adj;
@@ -59,12 +58,13 @@ public:
 	void clearPrevious();
 	bool checkCompleteness();
 	void getWeightedPaths(vector <vector< pair<vector<string>, float >> >&, float);
+	float getCurrentWeight(vector<pair<string, float>> allweights, string transport);
 
 	vector<pair<float, string>> getAllPaths(Node* start, Node* dest, float budget);
 
 	//mariam
 	vector<pair<vector<string>, float>> lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited);
-	float getWeight(Node* parent, Node* child);
+	float getLeastWeight(Node* parent, Node* child);
 
 	~Graph();
 };
