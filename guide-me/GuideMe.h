@@ -2,7 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_GuideMe.h"
-#include <QGraphicsView> // really?
+#include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QGraphicsEllipseItem>
@@ -16,7 +16,7 @@ class GuideMe : public QMainWindow
 {
     Q_OBJECT
     Ui::GuideMeClass ui;
-    Graph* graph; // Add the graph member variable
+    Graph* graph;
     File* file;
     int actionMade = -1;
     //first -> action , second.first -> nodes[.first>start, .second>target], second.second ->[.first>weight, .second>way]
@@ -28,48 +28,30 @@ public:
     ~GuideMe();
 
     bool updateVariables(string& src, string& dest, float& budget, string& transportation, int);
-
+    
     void on_openSecond_clicked();
-
     void on_openThird_clicked();
-
     void on_back2_clicked();
-
     void on_back3_clicked();
-
     void on_back4_clicked();
-
     void on_back5_clicked();
-
     void on_mainBack_clicked();
-
-    void clearUp();
+    void on_openThird_2_clicked();
+    void on_openUpdate_clicked();
+    void on_updateButton_clicked();
+    void on_addButton_clicked();
+    void on_deleteButton_clicked();
+    void on_undoButton_clicked();
+    void on_openTraverse_clicked();
+    void on_dfsButton_clicked();
+    void on_bfsButton_clicked();
+    void on_completeButton_clicked();
 
     void closeEvent(QCloseEvent* event) override;
 
-    void on_openThird_2_clicked();
-
-    void on_openUpdate_clicked();
-
-    void on_updateButton_clicked();
-
-    void on_addButton_clicked();
-
-    void on_deleteButton_clicked();
-
-    void on_undoButton_clicked();
-
-    void on_openTraverse_clicked();
-
-    void on_dfsButton_clicked();
-
-    void on_bfsButton_clicked();
-
-    void on_completeButton_clicked();
-
-    void drawGraphInStackedWidget(Graph* graph);
+    void clearUp();
 
     void setGraph(Graph* graph);
     void setFile(File*);
-};
 
+};

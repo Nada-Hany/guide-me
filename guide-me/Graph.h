@@ -17,14 +17,14 @@ public:
 	string value;
 	Node* previous = nullptr;
 	unordered_map<Node*, vector<pair<string, float>>> weights;
-
 	bool isVisted = false;
+
+	Node(string);
 	int weightExist(Node*, Node*, string);
 	bool changeWeightValue(vector<pair<string, float>>&, float, string);
 	void changeWeightType(vector<pair<string, float>>&, string);
 	bool deleteWeight(Node*, Node*, string);
 	bool addWeight(Node*, Node*, float, string);
-	Node(string);
 	~Node();
 
 };

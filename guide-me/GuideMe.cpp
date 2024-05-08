@@ -4,7 +4,7 @@
 #include <iterator> 
 #include <QRandomGenerator>
 #include <qcloseevent>
-#include<QMovie>
+#include <QMovie>
 #include <sstream>
 #include <iomanip>
 
