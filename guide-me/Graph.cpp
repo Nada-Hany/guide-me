@@ -365,7 +365,7 @@ vector<pair<float, string>> Graph::getAllPaths(Node* start, Node* dest, float bu
 	sort(out.begin(), out.end());
 	return out;
 }
-//find paths with lowest price  -- mariam
+//find paths with lowest price  
 vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited) {
 	path.push_back(src);
 	visited.insert(src);

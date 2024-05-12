@@ -43,7 +43,7 @@ GuideMe::GuideMe(QWidget* parent)
     connect(ui.back4, &QPushButton::clicked, this, &GuideMe::on_back4_clicked);
     connect(ui.back5, &QPushButton::clicked, this, &GuideMe::on_back5_clicked);
     connect(ui.mainBack, &QPushButton::clicked, this, &GuideMe::on_mainBack_clicked);
-
+    //font case
     QFontDatabase fontDb;
     int fontId = fontDb.addApplicationFont("img/GeorgiaPro-CondBold.ttf");
     QFont font;
@@ -141,7 +141,7 @@ void GuideMe::on_updateButton_clicked() {
         float weight = graph->getCurrentWeight(srcNode->weights[destNode], transportation);
         previousWeight.push(weight);
         actions.push(make_pair(actionMade, make_pair(make_pair(srcNode, destNode), make_pair(budget, transportation))));
-        result = "UPDATED"; //nada (check updated or not )
+        result = "UPDATED"; 
     }
     else
         result = "There's no such edge";
@@ -157,7 +157,7 @@ void GuideMe::on_addButton_clicked() {
     {
         actionMade = 1;
         actions.push(make_pair(actionMade, make_pair(make_pair(srcNode, destNode), make_pair(budget, transportation))));
-        result = "ADDED"; //nada (check added or not )
+        result = "ADDED";
     }
     else
         result = "try again";
@@ -169,7 +169,7 @@ void GuideMe::on_deleteButton_clicked() {
     bool check = updateVariables(src, dest, budget, transportation, 2);
     Node* srcNode = graph->getNode(src);
     Node* destNode = graph->getNode(dest);
-    //nada (check deleted or not )
+    
     if (check)
     {
         actionMade = 2;
@@ -205,9 +205,6 @@ void GuideMe::on_undoButton_clicked() {
 }
 void GuideMe::on_openTraverse_clicked() {
     ui.stackedWidget->setCurrentIndex(1);
-    QMovie* movie4 = new QMovie("img/pharaoh.gif");
-    ui.label_pharaoh->setMovie(movie4);
-    movie4->start();
 }
 
 void GuideMe::on_openThird_clicked() {
@@ -282,6 +279,7 @@ void GuideMe::on_openThird_2_clicked() {
             }
             ui.stackedWidget->setCurrentIndex(2);
             ui.mapPaths->setText(QString::fromStdString(result));
+            drawGraph(*graph, ui.graphicsView);
 
         }
     }
@@ -299,7 +297,8 @@ void GuideMe::on_dfsButton_clicked() {
     {
         string out = "";
         graph->dfs(graph->getNode(source), out);
-        ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (DFS traversing map)
+        ui.mapPathsAlgo->setText(QString::fromStdString(out)); 
+        drawGraph(*graph, ui.graphicsView_2);
     }else
         ui.mapPathsAlgo->setText(QString::fromStdString("choose a city")); 
 
@@ -311,16 +310,76 @@ void GuideMe::on_bfsButton_clicked() {
     toLowerCase(source);
     if(!source.empty())
         out = graph->bfs(graph->getNode(source));
-    ui.mapPathsAlgo->setText(QString::fromStdString(out)); //nada (BFS traversing map)
+    ui.mapPathsAlgo->setText(QString::fromStdString(out)); 
+    drawGraph(*graph, ui.graphicsView_2);
 }
 
 void GuideMe::on_completeButton_clicked() {
     bool isComplete = graph->checkCompleteness();
     if (isComplete)
-        ui.mapPathsAlgo->setText("Graph is conmplete"); //nada (check complete)
+        ui.mapPathsAlgo->setText("Graph is conmplete"); 
     else
         ui.mapPathsAlgo->setText("Graph isn't conmplete");
 }
+
+void GuideMe::drawGraph(const Graph& graph, QGraphicsView* view) {
+    QGraphicsScene* scene = new QGraphicsScene(this);
+    //ui.graphicsView->setScene(scene);
+    view->setScene(scene);
+
+    unordered_map<string, QPointF> nodePositions;
+
+    // Determine the position of each node
+    int numNodes = graph.allNodes.size();
+    int angleStep = 360 / numNodes;
+    int radius = 200;
+    int centerX = ui.graphicsView->width() / 2;
+    int centerY = ui.graphicsView->height() / 2;
+
+    int angle = 0;
+    for (const auto& node : graph.allNodes) {
+        qreal x = centerX + radius * qCos(qDegreesToRadians(angle));
+        qreal y = centerY + radius * qSin(qDegreesToRadians(angle));
+        QPointF position(x, y);
+        nodePositions[node] = position;
+        angle += angleStep;
+    }
+
+    // Draw nodes
+    for (const auto& pair : nodePositions) {
+        qreal x = pair.second.x();
+        qreal y = pair.second.y();
+        QGraphicsEllipseItem* nodeItem = scene->addEllipse(x - 10, y - 10, 60, 60, QPen(Qt::white), QBrush(Qt::black));
+        QGraphicsTextItem* textItem = scene->addText(QString::fromStdString(pair.first));
+        textItem->setPos(x - 10, y - 25); // or 20? -> 
+        //change text style
+        QFont font = textItem->font();
+        font.setPointSize(12);
+        font.setWeight(QFont::Bold);
+        textItem->setFont(font);
+        textItem->setDefaultTextColor(Qt::white);
+       // font.setFamily("Arial");
+        //text position
+        QRectF textRect = textItem->boundingRect(); 
+        qreal textX = x - textRect.width() / 2.5; 
+        qreal textY = y + 45; 
+        textItem->setPos(textX, textY); 
+    }
+
+    // Draw edges
+    for (const auto& pair : graph.adj) {
+        Node* sourceNode = pair.first;
+        const vector<Node*>& destNodes = pair.second;
+        QPointF sourcePos = nodePositions[sourceNode->value];
+        for (const auto& destNode : destNodes) {
+            QPointF destPos = nodePositions[destNode->value];
+            QGraphicsLineItem* edgeItem = scene->addLine(sourcePos.x(), sourcePos.y(), destPos.x(), destPos.y(), QPen(Qt::white));
+
+        }
+
+    }
+}
+
 
 void GuideMe::on_back2_clicked() {
     ui.stackedWidget->setCurrentIndex(0);

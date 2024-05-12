@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="mainBack">
@@ -67,7 +67,7 @@
        <rect>
         <x>220</x>
         <y>130</y>
-        <width>1081</width>
+        <width>1141</width>
         <height>280</height>
        </rect>
       </property>
@@ -88,9 +88,6 @@ font: 900 170pt &quot;Georgia&quot;;
       </property>
       <property name="text">
        <string>Guide Me</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
      <widget class="QPushButton" name="openTraverse">
@@ -252,9 +249,6 @@ font: 900 170pt &quot;Georgia&quot;;
       <property name="text">
        <string>The best Real-Time Travel Guide App In EGYPT </string>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
      </widget>
      <zorder>label_2</zorder>
      <zorder>mainBack</zorder>
@@ -385,10 +379,10 @@ font: 900 170pt &quot;Georgia&quot;;
      <widget class="QLabel" name="mapPathsAlgo">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>200</y>
-        <width>711</width>
-        <height>381</height>
+        <x>580</x>
+        <y>500</y>
+        <width>581</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="font">
@@ -400,17 +394,16 @@ font: 900 170pt &quot;Georgia&quot;;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-								color:rgb(131, 131, 131);
-								background-color: transparent;
-								font: 600 28pt &quot;Sitka Display Semibold&quot;;
-							</string>
+       <string notr="true">color:rgb(131, 131, 131);
+background-color: transparent;
+font: 600 28pt &quot;Sitka Display Semibold&quot;;
+</string>
       </property>
       <property name="text">
        <string/>
       </property>
       <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QComboBox" name="allNodes">
@@ -458,22 +451,19 @@ font: 900 170pt &quot;Georgia&quot;;
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_pharaoh">
+     <widget class="QGraphicsView" name="graphicsView_2">
       <property name="geometry">
        <rect>
-        <x>980</x>
-        <y>130</y>
-        <width>411</width>
-        <height>391</height>
+        <x>520</x>
+        <y>20</y>
+        <width>681</width>
+        <height>471</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-								background-color: transparent;
-							</string>
-      </property>
-      <property name="text">
-       <string/>
+       <string notr="true">color:rgb(131, 131, 131);
+background-color: transparent;
+</string>
       </property>
      </widget>
      <zorder>label_14</zorder>
@@ -483,7 +473,7 @@ font: 900 170pt &quot;Georgia&quot;;
      <zorder>back4</zorder>
      <zorder>mapPathsAlgo</zorder>
      <zorder>allNodes</zorder>
-     <zorder>label_pharaoh</zorder>
+     <zorder>graphicsView_2</zorder>
     </widget>
     <widget class="QWidget" name="lowest_price_map">
      <widget class="QPushButton" name="back3">
@@ -518,10 +508,10 @@ font: 900 170pt &quot;Georgia&quot;;
      <widget class="QLabel" name="mapPaths">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>40</y>
-        <width>1201</width>
-        <height>531</height>
+        <x>100</x>
+        <y>80</y>
+        <width>901</width>
+        <height>511</height>
        </rect>
       </property>
       <property name="font">
@@ -537,7 +527,7 @@ font: 900 170pt &quot;Georgia&quot;;
 							</string>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string> </string>
       </property>
      </widget>
      <widget class="QLabel" name="label_13">
@@ -556,9 +546,25 @@ font: 900 170pt &quot;Georgia&quot;;
        <string/>
       </property>
      </widget>
+     <widget class="QGraphicsView" name="graphicsView">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>70</y>
+        <width>681</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:rgb(131, 131, 131);
+background-color: transparent;
+</string>
+      </property>
+     </widget>
      <zorder>label_13</zorder>
      <zorder>back3</zorder>
      <zorder>mapPaths</zorder>
+     <zorder>graphicsView</zorder>
     </widget>
     <widget class="QWidget" name="update_graph">
      <widget class="QGroupBox" name="groupBox_2">
@@ -589,8 +595,8 @@ font: 900 170pt &quot;Georgia&quot;;
         <rect>
          <x>40</x>
          <y>420</y>
-         <width>160</width>
-         <height>35</height>
+         <width>109</width>
+         <height>29</height>
         </rect>
        </property>
        <property name="font">
@@ -610,7 +616,7 @@ font: 900 170pt &quot;Georgia&quot;;
 								</string>
        </property>
        <property name="sizeAdjustPolicy">
-        <enum>QComboBox::SizeAdjustPolicy::AdjustToContentsOnFirstShow</enum>
+        <enum>QComboBox::AdjustToContents</enum>
        </property>
        <property name="placeholderText">
         <string>source</string>
@@ -655,7 +661,7 @@ font: 900 170pt &quot;Georgia&quot;;
         </rect>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+        <enum>Qt::NoContextMenu</enum>
        </property>
        <property name="text">
         <string>TextLabel</string>
@@ -861,7 +867,7 @@ font: 900 170pt &quot;Georgia&quot;;
        </font>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::FocusPolicy::NoFocus</enum>
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">
@@ -912,7 +918,7 @@ font: 900 170pt &quot;Georgia&quot;;
        </font>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::FocusPolicy::NoFocus</enum>
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">
@@ -921,9 +927,6 @@ font: 900 170pt &quot;Georgia&quot;;
 									border-radius: 10px;
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
       <property name="placeholderText">
        <string>transportation</string>
@@ -947,7 +950,7 @@ font: 900 170pt &quot;Georgia&quot;;
        </font>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::FocusPolicy::NoFocus</enum>
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">
@@ -956,9 +959,6 @@ font: 900 170pt &quot;Georgia&quot;;
 									border-radius: 10px;
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
       <property name="placeholderText">
        <string>budget</string>
@@ -1154,7 +1154,7 @@ font: 900 170pt &quot;Georgia&quot;;
         </rect>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::ContextMenuPolicy::PreventContextMenu</enum>
+        <enum>Qt::NoContextMenu</enum>
        </property>
        <property name="text">
         <string>TextLabel</string>
@@ -1197,10 +1197,10 @@ font: 900 170pt &quot;Georgia&quot;;
         </font>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::FocusPolicy::NoFocus</enum>
+        <enum>Qt::NoFocus</enum>
        </property>
        <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
+        <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">
@@ -1209,9 +1209,6 @@ font: 900 170pt &quot;Georgia&quot;;
 									border-radius: 10px;
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
        <property name="placeholderText">
         <string>budget</string>

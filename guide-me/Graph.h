@@ -62,7 +62,7 @@ public:
 
 	vector<pair<float, string>> getAllPaths(Node* start, Node* dest, float budget);
 
-	//mariam
+	
 	vector<pair<vector<string>, float>> lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited);
 	float getLeastWeight(Node* parent, Node* child);
 
