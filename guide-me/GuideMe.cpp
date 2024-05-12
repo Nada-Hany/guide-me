@@ -183,7 +183,7 @@ void GuideMe::on_deleteButton_clicked() {
         result = "edge deleted";
     }
     else
-        result = "edge does't exist";
+        result = "edge doesn't exist";
     ui.updateLabel->setText(QString::fromStdString(result));
 }
 void GuideMe::on_undoButton_clicked() {
@@ -216,7 +216,6 @@ void GuideMe::on_openTraverse_clicked() {
 }
 
 void GuideMe::on_openThird_clicked() {
-    clearUp();
     vector<string> pathS;
     set<string> visitS;
 
@@ -261,7 +260,6 @@ void GuideMe::on_openThird_2_clicked() {
         return;
     }
     clearUp();
-
     string src = ui.sourceBox->currentText().toStdString();
     Node* srcNode = graph->getNode(src);
     string dest = ui.destBox->currentText().toStdString();
@@ -283,19 +281,17 @@ void GuideMe::on_openThird_2_clicked() {
             {
                 stringstream ss;
                 ss << fixed << setprecision(2) << path.first;
-                result = result + path.second + " -> " + ss.str() + " LE\n";
+                result = result + path.second + ss.str() + "LE\n";
             }
             ui.stackedWidget->setCurrentIndex(2);
             ui.mapPaths->setText(QString::fromStdString(result));
             drawGraph(*graph, ui.graphicsView, true);
-
         }
     }
     else {
         QMessageBox::information(this, "Error", "Please select a different source/destination.");
         drawGraph(*graph, ui.graphicsView, false);
     }
-
 }
 
 void GuideMe::on_dfsButton_clicked() {

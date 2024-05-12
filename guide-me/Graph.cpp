@@ -317,18 +317,22 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 			}
 			//final -> 1st edge , tmp -> 2nd edge >> add on final /
 			else {
+				vector < pair<vector<string>, float>>combinations;
 				for (int outer = 0; outer < final.size(); outer++) {
 					for (int inner = 0; inner < tmp.size(); inner++) {
 						vector<string> weightType;
 						//valid combin.
 						if (final[outer].second + tmp[inner].second <= budget) {
 
-							final[outer].first.push_back(tmp[inner].first[0]);
-							final[outer].second += tmp[inner].second;
+							/*final[outer].first.push_back(tmp[inner].first[0]);
+							final[outer].second += tmp[inner].second;*/
+							weightType = final[outer].first;
+							weightType.push_back(tmp[inner].first[0]);
+							combinations.push_back(make_pair(weightType, final[outer].second + tmp[inner].second));
 						}
 					}
 				}
-
+				final = combinations;
 			}
 		}
 		/*next iteration -> another path*/
@@ -365,6 +369,7 @@ vector<pair<float, string>> Graph::getAllPaths(Node* start, Node* dest, float bu
 	sort(out.begin(), out.end());
 	return out;
 }
+
 //find paths with lowest price  
 vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, vector<string>& path, float budget, set<string>& visited) {
 	path.push_back(src);
