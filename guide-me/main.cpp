@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     w.resize(1920, 1080);
     w.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint); 
     w.setWindowState(Qt::WindowMaximized);
-    //w.showFullScreen();
+    w.showFullScreen();
     w.show();
 
     return a.exec();

@@ -88,6 +88,9 @@ void GuideMe::setFile(File* f)
 }
 
 void GuideMe::on_openSecond_clicked() {
+    ui.budgetLine->clear();
+    ui.sourceBox->setCurrentIndex(-1);
+    ui.destBox->setCurrentIndex(-1);
     ui.stackedWidget->setCurrentIndex(4);
     QMovie* movie2 = new QMovie("img/road2.gif");
     ui.road_label->setMovie(movie2);
@@ -123,7 +126,10 @@ bool GuideMe::updateVariables(string& source, string& destination, float& budget
 }
 
 void GuideMe::on_openUpdate_clicked() {
-    
+    ui.transLine->clear();
+    ui.budgetLine_2->clear();
+    ui.sourceBox_2->setCurrentIndex(-1);
+    ui.destBox_2->setCurrentIndex(-1);
     ui.stackedWidget->setCurrentIndex(3);
     QMovie* movie3 = new QMovie("img/road2.gif");
     ui.road_label_2->setMovie(movie3);
@@ -204,10 +210,13 @@ void GuideMe::on_undoButton_clicked() {
 
 }
 void GuideMe::on_openTraverse_clicked() {
+    ui.mapPathsAlgo->setText(QString::fromStdString(""));
+    drawGraph(*graph, ui.graphicsView_2, false);
     ui.stackedWidget->setCurrentIndex(1);
 }
 
 void GuideMe::on_openThird_clicked() {
+    clearUp();
     vector<string> pathS;
     set<string> visitS;
 
@@ -217,9 +226,7 @@ void GuideMe::on_openThird_clicked() {
     }
 
     string src = ui.sourceBox->currentText().toStdString();
-    toLowerCase(src);
     string dest = ui.destBox->currentText().toStdString();
-    toLowerCase(dest);
     float budget = ui.budgetLine->text().toInt();
     if (budget == 0) {
         ui.label->setText("Please enter a valid budget");
@@ -243,7 +250,7 @@ void GuideMe::on_openThird_clicked() {
         }
         ui.stackedWidget->setCurrentIndex(2);
         ui.mapPaths->setText(QString::fromStdString(result));
-        drawGraph(*graph, ui.graphicsView);
+        drawGraph(*graph, ui.graphicsView, true);
     }
 }
 
@@ -253,6 +260,7 @@ void GuideMe::on_openThird_2_clicked() {
         QMessageBox::information(this, "Error", "Please select a source, destination, and budget.");
         return;
     }
+    clearUp();
 
     string src = ui.sourceBox->currentText().toStdString();
     Node* srcNode = graph->getNode(src);
@@ -265,7 +273,6 @@ void GuideMe::on_openThird_2_clicked() {
     }
     if(srcNode!=destNode)
     {
-        clearUp();
         vector<pair<float, string>> paths = graph->getAllPaths(srcNode, destNode, budget);
         if (paths.empty()) {
             ui.label->setText("No path found within budget");
@@ -280,12 +287,13 @@ void GuideMe::on_openThird_2_clicked() {
             }
             ui.stackedWidget->setCurrentIndex(2);
             ui.mapPaths->setText(QString::fromStdString(result));
-            drawGraph(*graph, ui.graphicsView);
+            drawGraph(*graph, ui.graphicsView, true);
 
         }
     }
     else {
         QMessageBox::information(this, "Error", "Please select a different source/destination.");
+        drawGraph(*graph, ui.graphicsView, false);
     }
 
 }
@@ -293,37 +301,49 @@ void GuideMe::on_openThird_2_clicked() {
 void GuideMe::on_dfsButton_clicked() {
     clearUp();
     string source = ui.allNodes->currentText().toStdString();
-    toLowerCase(source);
     if(!source.empty())
     {
         string out = "";
         graph->dfs(graph->getNode(source), out);
         ui.mapPathsAlgo->setText(QString::fromStdString(out)); 
-        drawGraph(*graph, ui.graphicsView_2);
+        drawGraph(*graph, ui.graphicsView_2, true);
     }else
-        ui.mapPathsAlgo->setText(QString::fromStdString("choose a city")); 
+    {
+        ui.mapPathsAlgo->setText(QString::fromStdString("choose a city"));
+        drawGraph(*graph, ui.graphicsView_2, false);
+    }
 
 }
 
 void GuideMe::on_bfsButton_clicked() {
     clearUp();
+   
     string source = ui.allNodes->currentText().toStdString(), out ="choose city";
-    toLowerCase(source);
-    if(!source.empty())
+ 
+    if (!source.empty())
+    {
         out = graph->bfs(graph->getNode(source));
-    ui.mapPathsAlgo->setText(QString::fromStdString(out)); 
-    drawGraph(*graph, ui.graphicsView_2);
+        ui.mapPathsAlgo->setText(QString::fromStdString(out));
+        drawGraph(*graph, ui.graphicsView_2, true);
+    }
+    else
+    {
+        ui.mapPathsAlgo->setText(QString::fromStdString("choose a city"));
+        drawGraph(*graph, ui.graphicsView_2, false);
+    }
 }
 
 void GuideMe::on_completeButton_clicked() {
+    clearUp();
     bool isComplete = graph->checkCompleteness();
     if (isComplete)
-        ui.mapPathsAlgo->setText("Graph is conmplete"); 
+        ui.mapPathsAlgo->setText("Graph is complete"); 
     else
-        ui.mapPathsAlgo->setText("Graph isn't conmplete");
+        ui.mapPathsAlgo->setText("Graph isn't complete");
+    drawGraph(*graph, ui.graphicsView_2, true);
 }
 
-void GuideMe::drawGraph(const Graph& graph, QGraphicsView* view) {
+void GuideMe::drawGraph(const Graph& graph, QGraphicsView* view, bool draw) {
     QGraphicsScene* scene = new QGraphicsScene(this);
     //ui.graphicsView->setScene(scene);
     view->setScene(scene);
@@ -338,47 +358,51 @@ void GuideMe::drawGraph(const Graph& graph, QGraphicsView* view) {
     int centerY = ui.graphicsView->height() / 2;
 
     int angle = 0;
-    for (const auto& node : graph.allNodes) {
-        qreal x = centerX + radius * qCos(qDegreesToRadians(angle));
-        qreal y = centerY + radius * qSin(qDegreesToRadians(angle));
-        QPointF position(x, y);
-        nodePositions[node] = position;
-        angle += angleStep;
-    }
-
-    // Draw nodes
-    for (const auto& pair : nodePositions) {
-        qreal x = pair.second.x();
-        qreal y = pair.second.y();
-        QGraphicsEllipseItem* nodeItem = scene->addEllipse(x - 10, y - 10, 60, 60, QPen(Qt::white), QBrush(Qt::black));
-        QGraphicsTextItem* textItem = scene->addText(QString::fromStdString(pair.first));
-        textItem->setPos(x - 10, y - 25); // or 20? -> 
-        //change text style
-        QFont font = textItem->font();
-        font.setPointSize(12);
-        font.setWeight(QFont::Bold);
-        textItem->setFont(font);
-        textItem->setDefaultTextColor(Qt::white);
-       // font.setFamily("Arial");
-        //text position
-        QRectF textRect = textItem->boundingRect(); 
-        qreal textX = x - textRect.width() / 2.5; 
-        qreal textY = y + 45; 
-        textItem->setPos(textX, textY); 
-    }
-
-    // Draw edges
-    for (const auto& pair : graph.adj) {
-        Node* sourceNode = pair.first;
-        const vector<Node*>& destNodes = pair.second;
-        QPointF sourcePos = nodePositions[sourceNode->value];
-        for (const auto& destNode : destNodes) {
-            QPointF destPos = nodePositions[destNode->value];
-            QGraphicsLineItem* edgeItem = scene->addLine(sourcePos.x(), sourcePos.y(), destPos.x(), destPos.y(), QPen(Qt::white));
-
+    if (draw)
+    {
+        for (const auto& node : graph.allNodes) {
+            qreal x = centerX + radius * qCos(qDegreesToRadians(angle));
+            qreal y = centerY + radius * qSin(qDegreesToRadians(angle));
+            QPointF position(x, y);
+            nodePositions[node] = position;
+            angle += angleStep;
         }
 
+        // Draw nodes
+        for (const auto& pair : nodePositions) {
+            qreal x = pair.second.x();
+            qreal y = pair.second.y();
+            QGraphicsEllipseItem* nodeItem = scene->addEllipse(x - 10, y - 10, 60, 60, QPen(Qt::white), QBrush(Qt::black));
+            QGraphicsTextItem* textItem = scene->addText(QString::fromStdString(pair.first));
+            textItem->setPos(x - 10, y - 25); // or 20? -> 
+            //change text style
+            QFont font = textItem->font();
+            font.setPointSize(12);
+            font.setWeight(QFont::Bold);
+            textItem->setFont(font);
+            textItem->setDefaultTextColor(Qt::white);
+            // font.setFamily("Arial");
+             //text position
+            QRectF textRect = textItem->boundingRect();
+            qreal textX = x - textRect.width() / 2.5;
+            qreal textY = y + 45;
+            textItem->setPos(textX, textY);
+        }
+
+        // Draw edges
+        for (const auto& pair : graph.adj) {
+            Node* sourceNode = pair.first;
+            const vector<Node*>& destNodes = pair.second;
+            QPointF sourcePos = nodePositions[sourceNode->value];
+            for (const auto& destNode : destNodes) {
+                QPointF destPos = nodePositions[destNode->value];
+                QGraphicsLineItem* edgeItem = scene->addLine(sourcePos.x(), sourcePos.y(), destPos.x(), destPos.y(), QPen(Qt::white));
+
+            }
+        }
     }
+    else
+        scene->clear();
 }
 
 

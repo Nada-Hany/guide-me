@@ -47,7 +47,7 @@ public:
     void on_bfsButton_clicked();
     void on_completeButton_clicked();
 
-    void drawGraph(const Graph& graph, QGraphicsView* view);
+    void drawGraph(const Graph& graph, QGraphicsView* view, bool);
 
     void closeEvent(QCloseEvent* event) override;
 
