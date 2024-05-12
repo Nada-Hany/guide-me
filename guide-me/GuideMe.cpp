@@ -243,6 +243,7 @@ void GuideMe::on_openThird_clicked() {
         }
         ui.stackedWidget->setCurrentIndex(2);
         ui.mapPaths->setText(QString::fromStdString(result));
+        drawGraph(*graph, ui.graphicsView);
     }
 }
 

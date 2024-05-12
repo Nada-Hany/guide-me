@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="mainBack">
@@ -516,18 +516,20 @@ background-color: transparent;
       </property>
       <property name="font">
        <font>
-        <pointsize>22</pointsize>
-        <bold>true</bold>
+        <family>Sitka Display Semibold</family>
+        <pointsize>28</pointsize>
+        <italic>false</italic>
+        <fontweight>DemiBold</fontweight>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-								color:rgb(131, 131, 131);
-								background-color: transparent;
-							</string>
+       <string notr="true">color:rgb(131, 131, 131);
+background-color: transparent;
+font: 600 28pt &quot;Sitka Display Semibold&quot;;
+</string>
       </property>
       <property name="text">
-       <string> </string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="label_13">
@@ -1187,20 +1189,6 @@ background-color: transparent;
          <width>180</width>
          <height>35</height>
         </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Sitka Display Semibold</family>
-         <pointsize>20</pointsize>
-         <italic>false</italic>
-         <fontweight>DemiBold</fontweight>
-        </font>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">
