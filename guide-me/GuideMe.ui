@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="mainBack">
@@ -402,9 +402,6 @@ font: 600 28pt &quot;Sitka Display Semibold&quot;;
       <property name="text">
        <string/>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
      </widget>
      <widget class="QComboBox" name="allNodes">
       <property name="geometry">
@@ -531,9 +528,6 @@ font: 600 28pt &quot;Sitka Display Semibold&quot;;
       <property name="text">
        <string/>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-      </property>
      </widget>
      <widget class="QLabel" name="label_13">
       <property name="geometry">
@@ -600,8 +594,8 @@ background-color: transparent;
         <rect>
          <x>40</x>
          <y>420</y>
-         <width>170</width>
-         <height>35</height>
+         <width>109</width>
+         <height>29</height>
         </rect>
        </property>
        <property name="font">
@@ -621,7 +615,7 @@ background-color: transparent;
 								</string>
        </property>
        <property name="sizeAdjustPolicy">
-        <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
+        <enum>QComboBox::AdjustToContents</enum>
        </property>
        <property name="placeholderText">
         <string>source</string>
@@ -666,7 +660,7 @@ background-color: transparent;
         </rect>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+        <enum>Qt::NoContextMenu</enum>
        </property>
        <property name="text">
         <string>TextLabel</string>
@@ -872,7 +866,7 @@ background-color: transparent;
        </font>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::FocusPolicy::NoFocus</enum>
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="styleSheet">
        <string notr="true">
@@ -914,17 +908,6 @@ background-color: transparent;
         <height>35</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>Sitka Display Semibold</family>
-        <pointsize>20</pointsize>
-        <italic>false</italic>
-        <fontweight>DemiBold</fontweight>
-       </font>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::FocusPolicy::NoFocus</enum>
-      </property>
       <property name="styleSheet">
        <string notr="true">
 									background-color: rgb(255, 255, 255);
@@ -946,17 +929,6 @@ background-color: transparent;
         <height>35</height>
        </rect>
       </property>
-      <property name="font">
-       <font>
-        <family>Sitka Display Semibold</family>
-        <pointsize>20</pointsize>
-        <italic>false</italic>
-        <fontweight>DemiBold</fontweight>
-       </font>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::FocusPolicy::NoFocus</enum>
-      </property>
       <property name="styleSheet">
        <string notr="true">
 									background-color: rgb(255, 255, 255);
@@ -964,9 +936,6 @@ background-color: transparent;
 									border-radius: 10px;
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
       <property name="placeholderText">
        <string>budget</string>
@@ -1162,7 +1131,7 @@ background-color: transparent;
         </rect>
        </property>
        <property name="contextMenuPolicy">
-        <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+        <enum>Qt::NoContextMenu</enum>
        </property>
        <property name="text">
         <string>TextLabel</string>
@@ -1203,9 +1172,6 @@ background-color: transparent;
 									border-radius: 10px;
 									font: 600 20pt &quot;Sitka Display Semibold&quot;;
 								</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
        <property name="placeholderText">
         <string>budget</string>
