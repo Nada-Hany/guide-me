@@ -113,7 +113,7 @@ bool GuideMe::updateVariables(string& source, string& destination, float& budget
             return src->addWeight(src, dest, budget, transportation);
             //delete
         case 2:
-            return src->deleteWeight(src, dest, transportation);
+            return src->deleteWeight(src, dest, transportation, budget);
             //modify 
         case 3:
             return src->changeWeightValue(src->weights[dest], budget, transportation);
@@ -173,6 +173,7 @@ void GuideMe::on_deleteButton_clicked() {
     string src, dest, transportation, result;
     float budget;
     bool check = updateVariables(src, dest, budget, transportation, 2);
+   
     Node* srcNode = graph->getNode(src);
     Node* destNode = graph->getNode(dest);
     
@@ -191,7 +192,7 @@ void GuideMe::on_undoButton_clicked() {
     if (actions.size() != 0)
     {
         if (actions.top().first == 1) {
-            actions.top().second.first.first->deleteWeight(actions.top().second.first.first, actions.top().second.first.second, actions.top().second.second.second);
+            actions.top().second.first.first->deleteWeight(actions.top().second.first.first, actions.top().second.first.second, actions.top().second.second.second, actions.top().second.second.first);
             ui.updateLabel->setText("edge deleted");
         }
         else if (actions.top().first == 2) {

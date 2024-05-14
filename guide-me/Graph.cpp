@@ -19,10 +19,6 @@ int Node::weightExist(Node* parent, Node* child, string weightType) {
 	//if the edge already exist either ways.
 	if (parent->weights.find(child) != parent->weights.end())
 	{
-		/*for (auto t : parent->transportations[child])
-			if(t.first == weightType)
-				return;*/
-
 		for (int i = 0; i < parent->weights[child].size(); i++)
 			if (parent->weights[child][i].first == weightType)
 				return i;
@@ -40,27 +36,24 @@ bool Node::changeWeightValue(vector<pair<string, float>>& allWeights, float weig
 	}
 	return false;
 }
-void Node::changeWeightType(vector<pair<string, float>>& allweights, string weightType) {
-	for (auto& t : allweights) {
-		if (weightType == t.first)
-		{
-			t.first = weightType;
-			return;
+
+bool Node::deleteWeight(Node* parent, Node* child, string weightType, float check ) {
+	bool isSame = false;
+	for (auto& t : parent->weights[child]) {
+		if (weightType == t.first && check == t.second)
+			isSame = true;
+	}
+	if(isSame)
+	{
+		int index = parent->weightExist(parent, child, weightType);
+		if (index != -1) {
+
+			int i = child->weightExist(child, parent, weightType);
+			if (i != -1)
+				child->weights[parent].erase(child->weights[parent].begin() + i);
 		}
 	}
-}
-bool Node::deleteWeight(Node* parent, Node* child, string weightType) {
-	int index = parent->weightExist(parent, child, weightType);
-	if (index != -1)
-	{
-		parent->weights[child].erase(parent->weights[child].begin() + index);
-		int i = child->weightExist(child, parent, weightType);
-		if (i != -1)
-			child->weights[parent].erase(child->weights[parent].begin() + i);
-		return true;
-	}
-	else
-		return false;
+	return isSame;
 }
 bool Node::addWeight(Node* parent, Node* child, float weightValue, string weightType) {
 	if(parent->weightExist(parent, child, weightType) == -1)
@@ -86,8 +79,7 @@ void Graph::toLowerCase(string& str) {
 }
 //Node*, vector<pair<string, float>> >  <<- transportation stucture
 //actions: 1->add a new transp, 2->delete, 3->update 
-//hayhsal eh lw ana b add transp already mwgoda? ha3ml update wla a-drop el request
-void Graph::addEdge(string node1, string node2, string weightType, float weightValue, int action) {
+void Graph::addEdge(string node1, string node2, string weightType, float weightValue) {
 	toLowerCase(node1);
 	toLowerCase(node2);
 	toLowerCase(weightType);
@@ -106,56 +98,16 @@ void Graph::addEdge(string node1, string node2, string weightType, float weightV
 		node1_obj->weights[node2_obj].push_back(make_pair(weightType, weightValue));
 	}
 	//child already exists so we need to check for options;
-	else {
-		switch (action)
-		{
-			//add
-		case 1:
-			if (node1_obj->weightExist(node1_obj, node2_obj, weightType) == -1)
-				bool x = node1_obj->addWeight(node1_obj, node2_obj, weightValue, weightType);
-			break;
-			//delete
-		case 2:
-			if (node1_obj->weightExist(node1_obj, node2_obj, weightType) != -1)
-				bool x = node1_obj->deleteWeight(node1_obj, node2_obj, weightType);
-			break;
-			//update weightValue
-		case 3:
-			if (node1_obj->weightExist(node1_obj, node2_obj, weightType) != -1)
-				bool x = node1_obj->changeWeightValue(node1_obj->weights[node2_obj], weightValue, weightType);
-			break;
-		default:
-			break;
-		}
-
-	}
+	else 
+		node1_obj->addWeight(node1_obj, node2_obj, weightValue, weightType);
+	
 	if (!childExist(node2_obj, node1_obj))
 	{
 		adj[node2_obj].push_back(node1_obj);
 		node2_obj->weights[node1_obj].push_back(make_pair(weightType, weightValue));
 	}
-	else {
-		switch (action)
-		{
-			//add
-		case 1:
-			if (node2_obj->weightExist(node2_obj, node1_obj, weightType) == -1)
-				node2_obj->addWeight(node2_obj, node1_obj, weightValue, weightType);
-			break;
-			//delete
-		case 2:
-			if (node2_obj->weightExist(node2_obj, node1_obj, weightType) != -1)
-				node2_obj->deleteWeight(node2_obj, node1_obj, weightType);
-			break;
-			//update weightValue
-		case 3:
-			if (node2_obj->weightExist(node2_obj, node1_obj, weightType) != -1)
-				node2_obj->changeWeightValue(node2_obj->weights[node1_obj], weightValue, weightType);
-			break;
-		default:
-			break;
-		}
-	}
+	else 
+		node2_obj->addWeight(node2_obj, node1_obj, weightValue, weightType);
 
 }
 void Graph::addEdge(string node1, string node2) {

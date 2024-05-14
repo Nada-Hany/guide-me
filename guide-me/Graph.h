@@ -22,8 +22,7 @@ public:
 	Node(string);
 	int weightExist(Node*, Node*, string);
 	bool changeWeightValue(vector<pair<string, float>>&, float, string);
-	void changeWeightType(vector<pair<string, float>>&, string);
-	bool deleteWeight(Node*, Node*, string);
+	bool deleteWeight(Node* parent, Node* child, string weightType, float check);
 	bool addWeight(Node*, Node*, float, string);
 	~Node();
 
@@ -48,7 +47,7 @@ public:
 	Graph();
 	Node* getNode(string);
 	void addEdge(string, string);
-	void addEdge(string, string, string, float, int);
+	void addEdge(string, string, string, float);
 	//traversing
 	void dfs(Node*, string&);
 	//all possible paths without considering the weights

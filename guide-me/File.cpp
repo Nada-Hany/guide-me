@@ -79,7 +79,7 @@ void File::convertToObjects(Graph* graph) {
 				if (i % 2 == 0) {
 					weightType = line[i];
 					weightValue = stod(line[i + 1]);
-					graph->addEdge(line[0], line[1], weightType, weightValue, 1);
+					graph->addEdge(line[0], line[1], weightType, weightValue);
 				}
 			}
 		}

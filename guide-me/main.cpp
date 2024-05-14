@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     w.setGraph(graph);
     w.setFile(file);
     w.resize(1920, 1080);
+    w.setWindowIcon(QIcon("img/icon.png"));
     w.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint); 
     w.setWindowState(Qt::WindowMaximized);
     w.showFullScreen();
