@@ -1,6 +1,4 @@
-5
-giza - cairo metro 30 bus 60 uber 230 
-giza - dahab bus 500 microbus 345 
-cairo - asyut bus 450 train 250 
-cairo - benisuef microbus 20 bus 15 
-dahab - benisuef microbus 200 bus 315 
+3
+hurghada - alexandria plane 3210 bus 420 
+hurghada - cairo bus 460 uber 3230 
+cairo - alexandria microbus 200 bus 415 

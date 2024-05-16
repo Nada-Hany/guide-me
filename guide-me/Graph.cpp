@@ -25,7 +25,6 @@ int Node::weightExist(Node* parent, Node* child, string weightType) {
 	}
 	return -1;
 }
-//update el mfrod tkon fel weight value bs wla type w weight value?
 bool Node::changeWeightValue(vector<pair<string, float>>& allWeights, float weightValue, string weightType) {
 	for (auto& t : allWeights) {
 		if (weightType == t.first)
@@ -39,14 +38,18 @@ bool Node::changeWeightValue(vector<pair<string, float>>& allWeights, float weig
 
 bool Node::deleteWeight(Node* parent, Node* child, string weightType, float check ) {
 	bool isSame = false;
-	for (auto& t : parent->weights[child]) {
-		if (weightType == t.first && check == t.second)
-			isSame = true;
+	if(parent->weights.find(child) != parent->weights.end())
+	{
+		for (auto& t : parent->weights[child]) {
+			if (weightType == t.first && check == t.second)
+				isSame = true;
+		}
 	}
 	if(isSame)
 	{
 		int index = parent->weightExist(parent, child, weightType);
 		if (index != -1) {
+			parent->weights[child].erase(parent->weights[child].begin() + index);
 
 			int i = child->weightExist(child, parent, weightType);
 			if (i != -1)
@@ -55,13 +58,16 @@ bool Node::deleteWeight(Node* parent, Node* child, string weightType, float chec
 	}
 	return isSame;
 }
+
 bool Node::addWeight(Node* parent, Node* child, float weightValue, string weightType) {
-	if(parent->weightExist(parent, child, weightType) == -1)
+	
+	if (parent->weightExist(parent, child, weightType) == -1)
 	{
 		parent->weights[child].push_back(make_pair(weightType, weightValue));
 		child->weights[parent].push_back(make_pair(weightType, weightValue));
 		return true;
 	}
+	
 	return false;
 }
 
@@ -86,10 +92,14 @@ void Graph::addEdge(string node1, string node2, string weightType, float weightV
 	Node* node2_obj = getNode(node2);
 	Node* node1_obj = getNode(node1);
 
-	if (node2_obj == nullptr)
+	if (node2_obj == nullptr) {
 		node2_obj = new Node(node2);
-	if (node1_obj == nullptr)
+		Nodes[node2] = node2_obj;
+	}
+	if (node1_obj == nullptr) {
 		node1_obj = new Node(node1);
+		Nodes[node1] = node1_obj;
+	}
 
 	//if the child doesn't exist -> so as the transportations else i need to check if it already exists
 	if (!childExist(node1_obj, node2_obj))
@@ -168,7 +178,6 @@ void Graph::dfs(Node* node, Node* dest) {
 
 	for (Node* child : adj[node])
 	{
-		//no collision between paths
 		if (!(child->isVisted))
 		{
 			child->previous = node;
@@ -196,9 +205,8 @@ void Graph::getEachPath(Node* dest) {
 }
 
 Node* Graph::getNode(string value) {
-	for (auto& node : adj) {
-		if (node.first->value == value)
-			return node.first;
+	if (Nodes.count(value)) {
+		return Nodes[value];
 	}
 	return nullptr;
 }
@@ -210,8 +218,6 @@ bool Graph::childExist(Node* parent, Node* child) {
 }
 
 bool Graph::checkCompleteness() {
-	if (adj.size() != nodesNumber)
-		return false;
 	for (auto& node : adj)
 		if (node.second.size() != nodesNumber - 1)
 			return false;
@@ -244,6 +250,7 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 	bool firstTime = true;
 	//each possible path
 	vector <string> test;
+	//[ [cair----giza, asyut], [giza, ] ]
 	for (auto& eachPath : paths) {
 		bool firstTime = true;
 		//each node for each path
@@ -267,6 +274,7 @@ void Graph::getWeightedPaths(vector <vector< pair<vector<string>, float >> >& al
 				firstTime = false;
 				final = tmp;
 			}
+			//cairo giza----mansoura 
 			//final -> 1st edge , tmp -> 2nd edge >> add on final /
 			else {
 				vector < pair<vector<string>, float>>combinations;
@@ -365,6 +373,10 @@ vector<pair<vector<string>, float>> Graph::lowestPath(string src, string dest, v
 				vector<pair<vector<string>, float>> sub_paths = lowestPath(neighbor->value, dest, new_path, budget, new_visited);
 				result.insert(result.end(), sub_paths.begin(), sub_paths.end());
 			}
+
+
+
+			
 		}
 	}
 

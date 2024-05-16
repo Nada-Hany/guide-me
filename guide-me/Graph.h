@@ -6,6 +6,7 @@
 #include <queue>
 #include <set>
 #include <unordered_map>
+#include "Hashing.h"
 
 using namespace std;
 
@@ -30,7 +31,13 @@ public:
 
 class Graph
 {
-	unordered_map <string, int> indices;
+	struct Hasher {
+		size_t operator()(const std::string& s) const {
+			Hashing hashing;
+			return hashing.make_hash(s); // Assuming hashing is an instance of Hashing
+		}
+	};
+	unordered_map <string, Node*, Hasher> Nodes;
 	bool inOpen(Node*, queue<Node*>);
 	bool childExist(Node*, Node*);
 	void toLowerCase(string&);

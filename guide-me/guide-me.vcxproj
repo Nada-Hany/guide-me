@@ -95,11 +95,13 @@
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GuideMe.cpp" />
+    <ClCompile Include="Hashing.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="Hashing.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
